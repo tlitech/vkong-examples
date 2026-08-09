@@ -1,0 +1,51 @@
+# sglang-serve — RTX 4090 + Qwen3.5-4B
+
+| | |
+|--|--|
+| **Image** | `lmsysorg/sglang:v0.5.17-cu129` (official) |
+| **GPU** | RTX 4090 × 1 |
+| **Model** | `Qwen/Qwen3.5-4B` |
+
+Use a **ready image**, not a thin pytorch runtime + install hacks.
+
+## Run
+
+```bash
+cd sglang_serve
+vkong run -C .
+```
+
+> **Note:** Local port changes each session. Check `vkong` output for the actual port (e.g. `http://127.0.0.1:50534`).
+
+## Smoke test
+
+```bash
+# List models
+curl -fsS http://127.0.0.1:<local-port>/v1/models | head -c 800
+
+# Chat completion
+curl -fsS http://127.0.0.1:<local-port>/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "Qwen/Qwen3.5-4B",
+    "messages": [{"role": "user", "content": "Say hi in one short sentence."}],
+    "max_tokens": 64,
+    "temperature": 0.2
+  }'
+```
+
+## Python client
+
+```bash
+pip install openai
+python client.py
+```
+
+## Env (optional)
+
+| Variable | Default |
+|----------|---------|
+| `MODEL` | `Qwen/Qwen3.5-4B` |
+| `CONTEXT_LENGTH` | `2048` |
+| `MEM_FRACTION_STATIC` | `0.85` |
+| `PORT` | `30000` (set by vkong) |
