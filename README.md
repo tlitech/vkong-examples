@@ -34,6 +34,7 @@ vkong login
 | [hello_world](hello_world) | Minimal FastAPI app on CPU (`ubuntu:24.04`) |
 | [vllm_serve](vllm_serve) | vLLM OpenAI-compatible server with Qwen3.5-4B on RTX 4090 |
 | [sglang_serve](sglang_serve) | SGLang OpenAI-compatible server with Qwen3.5-4B on RTX 4090 |
+| [triton_inference_server](triton_inference_server) | Triton Inference Server with MobileNetV2 (ONNX) on RTX 4090 |
 
 ## Usage
 
