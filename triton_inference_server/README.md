@@ -1,4 +1,4 @@
-# triton-serve — Triton Inference Server + MobileNetV2
+# triton-serve — NVIDIA Triton Inference Server + MobileNetV2
 
 | | |
 |--|--|
@@ -6,32 +6,38 @@
 | **GPU** | RTX 4090 × 1 |
 | **Model** | MobileNetV2 (ONNX, ImageNet 1001-class) |
 
-MobileNetV2 image classification served via Triton ONNX runtime backend.
+MobileNetV2 image classification served via the NVIDIA Triton Inference Server ONNX Runtime backend.
 
 ## Run
 
 ```bash
 cd triton_inference_server
-vkong run -C .
+vkong run -C . --destroy=false --keep-alive
 ```
 
-> **Note:** Deploy URL changes each session. Check `vkong` output.
+> **Note:** The local tunnel URL changes each session. Check `vkong` output, for example `http://127.0.0.1:50534`. `--destroy=false` keeps the machine running after Ctrl+C, so destroy it when you finish.
 
 ## Smoke test
 
 ```bash
 # Server health
-curl -fsS https://<deploy-url>/v2/health/ready
+curl -fsS http://127.0.0.1:<local-port>/v2/health/ready
 
 # Model metadata
-curl -fsS https://<deploy-url>/v2/models/mobilenetv2
+curl -fsS http://127.0.0.1:<local-port>/v2/models/mobilenetv2
 ```
 
 ## Python client
 
 ```bash
 pip install requests numpy Pillow
-python client.py test.jpg
+VKONG_URL=http://127.0.0.1:<local-port> python client.py test.jpg
+```
+
+## Destroy the machine
+
+```bash
+vkong instances destroy vk_<id>
 ```
 
 ### Demo

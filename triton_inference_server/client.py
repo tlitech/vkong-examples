@@ -1,13 +1,14 @@
-"""Triton Inference Server client — MobileNetV2 ImageNet classification."""
+"""NVIDIA Triton Inference Server client — MobileNetV2 ImageNet classification."""
 
 import json
+import os
 import sys
 
 import numpy as np
 import requests
 from PIL import Image
 
-URL = "https://f1gdnwj8-deploy.tli-tech.com"
+URL = os.environ.get("VKONG_URL", "").rstrip("/")
 MODEL = "mobilenetv2"
 
 # ImageNet class names (top ones for demo)
@@ -81,6 +82,11 @@ def infer(image_path):
 
 
 def main():
+    if not URL:
+        raise SystemExit(
+            "Set VKONG_URL to the local URL printed by vkong, for example: "
+            "VKONG_URL=http://127.0.0.1:<port> python client.py test.jpg"
+        )
     image_path = sys.argv[1] if len(sys.argv) > 1 else "test.jpg"
     classes = load_imagenet_classes()
     logits = infer(image_path)
