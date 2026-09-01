@@ -11,10 +11,12 @@ Minimal FastAPI app on a CPU instance. All scripts are inline in `.vkong.config`
 
 ```bash
 cd hello_world
-vkong run -C .
+vkong run -C . --destroy=false --keep-alive
 ```
 
 > **Note:** Local port changes each session. Check `vkong` output for the actual port.
+
+When finished, run `vkong app stop hello-world` to destroy the active rental and stop billing.
 
 ## Smoke test
 

@@ -34,10 +34,10 @@ pip install requests numpy Pillow
 VKONG_URL=http://127.0.0.1:<local-port> python client.py test.jpg
 ```
 
-## Destroy the machine
+## Stop the App
 
 ```bash
-vkong instances destroy vk_<id>
+vkong app stop triton-inference-server
 ```
 
 ### Demo
