@@ -2,7 +2,7 @@
 
 Example projects for [vkong](https://vkong.tli-tech.com) — rent a GPU, sync your code, run your app.
 
-## Install CLI (v0.9.2)
+## Install CLI
 
 ```bash
 # Linux
@@ -35,7 +35,7 @@ vkong login
 | [vllm_serve](vllm_serve) | Serve Qwen3.5-4B with vLLM on RTX 4090 |
 | [sglang_serve](sglang_serve) | Serve Qwen3.5-4B with SGLang on RTX 4090 |
 | [triton_inference_server](triton_inference_server) | Triton Inference Server with MobileNetV2 (ONNX) on RTX 4090 |
-| [llama_cpp_serve](llama_cpp_serve) | llama.cpp server with Qwen3.5-9B GGUF (Q4_K_M) on RTX 3060 |
+| [llama_cpp_serve](llama_cpp_serve) | llama.cpp server with Qwen3.5-9B GGUF (Q4_K_M) on RTX 4090 |
 
 ## Usage
 

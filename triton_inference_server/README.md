@@ -6,6 +6,10 @@
 | **GPU** | RTX 4090 × 1 |
 | **Model** | MobileNetV2 (ONNX, ImageNet 1001-class) |
 
+The start command uses `/opt/tritonserver/bin/tritonserver` explicitly because vkong's
+SSH-less agent replaces the image entrypoint and provider environments do not guarantee
+that Triton's bin directory remains on `PATH`.
+
 MobileNetV2 image classification served via the NVIDIA Triton Inference Server ONNX Runtime backend.
 
 ## Run

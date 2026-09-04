@@ -1,9 +1,15 @@
 """OpenAI-compatible streaming client for llama.cpp serve."""
 
 import json
+import os
 import requests
 
-BASE_URL = "https://wn56qmti-deploy.tli-tech.com"
+BASE_URL = os.environ.get("VKONG_URL", "").rstrip("/")
+if not BASE_URL:
+    raise SystemExit(
+        "Set VKONG_URL to the URL printed by vkong, for example: "
+        "VKONG_URL=http://127.0.0.1:<port> python client.py"
+    )
 
 resp = requests.post(
     f"{BASE_URL}/v1/chat/completions",

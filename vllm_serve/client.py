@@ -1,10 +1,16 @@
 """OpenAI-compatible client for vLLM serve."""
 
+import os
 from openai import OpenAI
 
-BASE_URL = "http://127.0.0.1:50534/v1"  # port changes each session, check vkong output
+base_url = os.environ.get("VKONG_URL", "").rstrip("/")
+if not base_url:
+    raise SystemExit(
+        "Set VKONG_URL to the URL printed by vkong, for example: "
+        "VKONG_URL=http://127.0.0.1:<port> python client.py"
+    )
 
-client = OpenAI(base_url=BASE_URL, api_key="unused")
+client = OpenAI(base_url=f"{base_url}/v1", api_key="unused")
 
 response = client.chat.completions.create(
     model="Qwen/Qwen3.5-4B",

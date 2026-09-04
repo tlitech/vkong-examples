@@ -3,7 +3,7 @@
 | | |
 |--|--|
 | **Image** | `ghcr.io/ggml-org/llama.cpp:server-cuda` (official) |
-| **GPU** | RTX 3060 x1 (12 GB VRAM) |
+| **GPU** | RTX 4090 x1 (24 GB VRAM; available on both supported backends) |
 | **Model** | `unsloth/Qwen3.5-9B-GGUF` — Q4_K_M (~5.7 GB) |
 | **API** | OpenAI-compatible (`/v1/chat/completions`, `/v1/models`) |
 
@@ -22,7 +22,7 @@ vkong run -C . --destroy=false --keep-alive
 ```
 
 What happens:
-- Searches for an RTX 3060 that matches the config
+- Searches for an RTX 4090 that matches the config on the selected backend
 - Rents a matching machine
 - Downloads the GGUF model (~5.7 GB, first time only)
 - Starts `llama-server` on port 8080
@@ -52,10 +52,8 @@ curl -s http://127.0.0.1:<port>/v1/chat/completions \
 
 ```bash
 pip install requests
-python client.py
+VKONG_URL=http://127.0.0.1:<local-port> python client.py
 ```
-
-Edit `BASE_URL` in `client.py` to your local tunnel URL.
 
 ## 5. Dev workflow
 

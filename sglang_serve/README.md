@@ -40,7 +40,7 @@ curl -fsS http://127.0.0.1:<local-port>/v1/chat/completions \
 
 ```bash
 pip install openai
-python client.py
+VKONG_URL=http://127.0.0.1:<local-port> python client.py
 ```
 
 ## Env (optional)
