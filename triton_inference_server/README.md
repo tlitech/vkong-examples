@@ -16,10 +16,10 @@ MobileNetV2 image classification served via the NVIDIA Triton Inference Server O
 
 ```bash
 cd triton_inference_server
-vkong run -C . --destroy=false --keep-alive
+vkong run -C .
 ```
 
-> **Note:** The local tunnel URL changes each session. Check `vkong` output, for example `http://127.0.0.1:50534`. `--destroy=false` keeps the machine running after Ctrl+C, so destroy it when you finish.
+> **Note:** The local tunnel URL changes each session. Check `vkong` output, for example `http://127.0.0.1:50534`. The machine stays running after Ctrl+C by default, so stop the App when you finish.
 
 ## Smoke test
 

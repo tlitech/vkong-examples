@@ -1,6 +1,6 @@
 # hello_world — CPU example (ubuntu:24.04)
 
-Minimal FastAPI app on a CPU instance. All scripts are inline in `.vkong.config`.
+Minimal FastAPI app on a CPU instance. All scripts are inline in `vkong.yaml`.
 
 | | |
 |--|--|
@@ -11,7 +11,7 @@ Minimal FastAPI app on a CPU instance. All scripts are inline in `.vkong.config`
 
 ```bash
 cd hello_world
-vkong run -C . --destroy=false --keep-alive
+vkong run -C .
 ```
 
 > **Note:** Local port changes each session. Check `vkong` output for the actual port.

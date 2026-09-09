@@ -1,5 +1,6 @@
 version: 1
-app: vllm-serve
+type: service
+app: sglang-serve
 gpu: RTX 4090
 num_gpus: 1
 cpu_cores: 8
@@ -8,18 +9,16 @@ disk_gb: 80
 inet_down_mbps: 500
 max_dph: 2.5
 verified_only: true
-# Official vLLM image: CUDA + torch + vLLM + toolchain preinstalled.
-# Do NOT use bare pytorch/*-runtime (missing gcc -> Triton fails; pip install is slow).
-image: vllm/vllm-openai:v0.26.0
-label: vllm-qwen3.5-4b
-app_port: 8000
+# Official SGLang image: CUDA + torch + SGLang + toolchain preinstalled.
+image: lmsysorg/sglang:v0.5.17-cu129
+label: sglang-qwen3.5-4b
+app_port: 30000
 work_dir: .
-# TUI Start machine: attach automatically (sync -> init -> start -> local port).
 auto_attach: true
 
 init_cmd: |
   #!/usr/bin/env bash
-  # Prefetch model weights (optional — vLLM can also download on first start).
+  # Prefetch model weights (optional — SGLang can also download on first start).
   set -euo pipefail
   export HF_HOME="${HF_HOME:-$PWD/.hf_cache}"
   export HUGGINGFACE_HUB_CACHE="${HUGGINGFACE_HUB_CACHE:-$HF_HOME/hub}"
@@ -35,16 +34,17 @@ init_cmd: |
 
 start: |
   #!/usr/bin/env bash
-  # OpenAI-compatible server. Image is vllm/vllm-openai — vLLM is already installed.
+  # OpenAI-compatible server. Image is lmsysorg/sglang — SGLang is already installed.
   set -euo pipefail
   export HF_HOME="${HF_HOME:-$PWD/.hf_cache}"
   export HUGGINGFACE_HUB_CACHE="${HUGGINGFACE_HUB_CACHE:-$HF_HOME/hub}"
-  PORT="${PORT:-8000}"
+  PORT="${PORT:-30000}"
   MODEL="${MODEL:-Qwen/Qwen3.5-4B}"
-  echo "[start] vllm serve $MODEL :$PORT"
-  exec vllm serve "$MODEL" \
+  echo "[start] sglang serve $MODEL :$PORT"
+  exec python3 -m sglang.launch_server \
+    --model-path "$MODEL" \
     --host 0.0.0.0 \
     --port "$PORT" \
-    --max-model-len "${MAX_MODEL_LEN:-2048}" \
-    --gpu-memory-utilization "${GPU_MEMORY_UTILIZATION:-0.9}" \
+    --context-length "${CONTEXT_LENGTH:-2048}" \
+    --mem-fraction-static "${MEM_FRACTION_STATIC:-0.85}" \
     --trust-remote-code

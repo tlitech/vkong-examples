@@ -42,7 +42,7 @@ vkong login
 ```bash
 # Run an example (rent → sync → start → local port)
 cd hello_world
-vkong run -C . --destroy=false --keep-alive
+vkong run -C .
 
 # Or use the TUI
 vkong
@@ -50,16 +50,16 @@ vkong
 
 > **Note:** Local port changes each session. Check `vkong` output for the actual port.
 
-`--destroy=false` keeps the rental after Ctrl+C. Stop the App with `vkong app stop <app-name>` when you are finished.
+The rental stays running after Ctrl+C by default. Stop the App with `vkong app stop <app-name>` when you are finished.
 
 ## Project layout
 
 ```text
 my-app/
-├── .vkong.config      # app, gpu, image, app_port, init_cmd, start
+├── vkong.yaml         # type, app, gpu, image, app_port, init_cmd, start
 ├── main.py
 ├── requirements.txt
 └── …
 ```
 
-All config and scripts go in `.vkong.config`. The `app:` field is required and names the App shown in the dashboard. Use `vkong new-config` to generate the file interactively.
+All config and scripts go in `vkong.yaml`. The `type:` field declares a `task` or `service`; these examples are services. The `app:` field is required and names the App shown in the dashboard. Use `vkong new-config` to generate the file interactively.

@@ -18,7 +18,7 @@ vkong login --server https://vkong.tli-tech.com
 ```bash
 cd vkong-examples/llama_cpp_serve
 
-vkong run -C . --destroy=false --keep-alive
+vkong run -C .
 ```
 
 What happens:
@@ -30,7 +30,7 @@ What happens:
 
 Note the local port from the output. vkong associates the rental with the configured `app: llama-cpp-serve`.
 
-`--destroy=false` keeps the machine alive after Ctrl+C so you can re-attach later without re-downloading the model.
+The machine stays alive after Ctrl+C by default, so you can attach later without downloading the model again.
 
 ## 3. Test the API
 
@@ -61,16 +61,16 @@ After Ctrl+C, the machine is still running. You don't need to `vkong run` again.
 
 ```bash
 # Re-open tunnel only (app still running on machine, instant)
-vkong attach vk_xxxx -C . --skip-sync --skip-run
+vkong attach vk_xxxx -C .
 
 # Re-sync code + restart llama-server (~1-5 min model reload)
-vkong attach vk_xxxx -C .
+vkong attach vk_xxxx -C . --update
 
 # Check what machines you have running
 vkong instances
 ```
 
-**Do not use `--live-mirror`** for LLM services — every file save restarts the server and reloads model weights (minutes).
+**Use `--watch` carefully** for LLM services: every file save restarts the server and reloads model weights, which can take minutes.
 
 ## 6. Publish a public URL (optional)
 
@@ -92,10 +92,10 @@ The active rental and its data are removed and billing stops. App history remain
 ```bash
 REPO=TheBloke/Mistral-7B-Instruct-v0.2-GGUF \
 MODEL_FILE=mistral-7b-instruct-v0.2.Q4_K_M.gguf \
-vkong run -C . --destroy=false --keep-alive
+vkong run -C .
 ```
 
-Or edit the defaults directly in `.vkong.config`.
+Or edit the defaults directly in `vkong.yaml`.
 
 ## Env reference
 

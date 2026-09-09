@@ -12,7 +12,7 @@ Use a **ready image**, not a thin pytorch runtime + install hacks.
 
 ```bash
 cd vllm_serve
-vkong run -C . --destroy=false --keep-alive
+vkong run -C .
 ```
 
 > **Note:** Local port changes each session. Check `vkong` output for the actual port (e.g. `http://127.0.0.1:50534`).
