@@ -36,6 +36,8 @@ vkong login
 | [sglang_serve](sglang_serve) | Serve Qwen3.5-4B with SGLang on RTX 4090 |
 | [triton_inference_server](triton_inference_server) | Triton Inference Server with MobileNetV2 (ONNX) on RTX 4090 |
 | [llama_cpp_serve](llama_cpp_serve) | llama.cpp server with Qwen3.5-9B GGUF (Q4_K_M) on RTX 4090 |
+| [sdxl_image](sdxl_image) | Generate one image with compact SDXL model SSD-1B, then exit |
+| [mnist_training](mnist_training) | Train a small MNIST CNN, save a checkpoint, then exit |
 
 ## Usage
 
@@ -62,4 +64,6 @@ my-app/
 └── …
 ```
 
-All config and scripts go in `vkong.yaml`. The `type:` field declares a `task` or `service`; these examples are services. The `app:` field is required and names the App shown in the dashboard. Use `vkong new-config` to generate the file interactively.
+All config and scripts go in `vkong.yaml`. The `type:` field declares a `task` or
+`service`; this repository contains both. The `app:` field is required and names the App
+shown in the dashboard. Use `vkong new-config` to generate the file interactively.

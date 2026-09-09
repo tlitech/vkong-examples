@@ -1,0 +1,28 @@
+version: 1
+type: task
+app: sdxl-image
+gpu: RTX 4090
+num_gpus: 1
+cpu_cores: 4
+ram_gb: 16
+disk_gb: 32
+inet_down_mbps: 300
+max_dph: 1.5
+verified_only: true
+image: pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
+label: sdxl-image
+work_dir: .
+
+init_cmd: |
+  #!/usr/bin/env bash
+  set -euo pipefail
+  python3 -m pip install --quiet \
+    'diffusers>=0.35,<0.36' \
+    'transformers>=4.48,<5' \
+    'accelerate>=1.2,<2' \
+    'safetensors>=0.5,<1' \
+    'sentencepiece>=0.2,<1'
+
+start_argv:
+  - python3
+  - generate.py
