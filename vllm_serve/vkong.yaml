@@ -14,8 +14,6 @@ image: vllm/vllm-openai:v0.26.0
 label: vllm-qwen3.5-4b
 app_port: 8000
 work_dir: .
-# TUI Start machine: attach automatically (sync -> init -> start -> local port).
-auto_attach: true
 
 init_cmd: |
   #!/usr/bin/env bash

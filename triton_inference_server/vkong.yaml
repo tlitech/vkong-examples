@@ -13,7 +13,6 @@ image: nvcr.io/nvidia/tritonserver:26.07-py3
 label: triton-mobilenetv2
 app_port: 8000
 work_dir: .
-auto_attach: true
 
 init_cmd: |
   #!/usr/bin/env bash

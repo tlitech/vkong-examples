@@ -13,7 +13,6 @@ image: lmsysorg/sglang:v0.5.17-cu129
 label: sglang-qwen3.5-4b
 app_port: 30000
 work_dir: .
-auto_attach: true
 
 init_cmd: |
   #!/usr/bin/env bash

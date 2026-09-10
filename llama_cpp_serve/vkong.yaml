@@ -13,7 +13,6 @@ image: ghcr.io/ggml-org/llama.cpp:server-cuda
 label: llamacpp-qwen3.5-9b
 app_port: 8080
 work_dir: .
-auto_attach: true
 
 init_cmd: |
   #!/usr/bin/env bash
