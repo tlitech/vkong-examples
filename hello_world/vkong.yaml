@@ -1,4 +1,3 @@
-version: 1
 type: service
 app: hello-world
 gpu: Any

@@ -1,4 +1,3 @@
-version: 1
 type: service
 app: sglang-serve
 gpu: RTX 4090

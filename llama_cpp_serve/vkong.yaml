@@ -1,4 +1,3 @@
-version: 1
 type: service
 app: llama-cpp-serve
 gpu: RTX 4090

@@ -1,4 +1,3 @@
-version: 1
 type: task
 app: mnist-training
 gpu: Any

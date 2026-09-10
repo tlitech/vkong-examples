@@ -1,4 +1,3 @@
-version: 1
 type: service
 app: vllm-serve
 gpu: RTX 4090
