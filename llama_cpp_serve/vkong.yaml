@@ -22,17 +22,29 @@ init_cmd: |
   REPO="${REPO:-unsloth/Qwen3.5-9B-GGUF}"
   MODEL_FILE="${MODEL_FILE:-Qwen3.5-9B-Q4_K_M.gguf}"
   MODEL_PATH="$MODEL_DIR/$MODEL_FILE"
+  MODEL_PART="$MODEL_PATH.part"
+  MIN_MODEL_BYTES="${MIN_MODEL_BYTES:-5000000000}"
   mkdir -p "$MODEL_DIR"
-  if [ -f "$MODEL_PATH" ]; then
+  MODEL_BYTES="$(stat -c %s "$MODEL_PATH" 2>/dev/null || echo 0)"
+  if [ "$MODEL_BYTES" -ge "$MIN_MODEL_BYTES" ]; then
     echo "[init] model already downloaded: $MODEL_PATH ($(ls -lh "$MODEL_PATH" | awk '{print $5}'))"
   else
+    if [ -f "$MODEL_PATH" ] && [ ! -f "$MODEL_PART" ]; then
+      mv "$MODEL_PATH" "$MODEL_PART"
+    fi
     echo "[init] downloading $REPO/$MODEL_FILE → $MODEL_PATH"
     if ! command -v curl >/dev/null 2>&1; then
       apt-get update -qq && apt-get install -y -qq curl ca-certificates
     fi
-    curl -fSL --progress-bar \
+    curl -fSL --retry 5 --retry-delay 2 --retry-all-errors --continue-at - --progress-bar \
       "https://huggingface.co/$REPO/resolve/main/$MODEL_FILE" \
-      -o "$MODEL_PATH"
+      -o "$MODEL_PART"
+    MODEL_BYTES="$(stat -c %s "$MODEL_PART" 2>/dev/null || echo 0)"
+    if [ "$MODEL_BYTES" -lt "$MIN_MODEL_BYTES" ]; then
+      echo "[init] incomplete model download: $MODEL_BYTES bytes" >&2
+      exit 1
+    fi
+    mv "$MODEL_PART" "$MODEL_PATH"
     echo "[init] downloaded $(ls -lh "$MODEL_PATH" | awk '{print $5}')"
   fi
   echo "[init] done"
