@@ -13,7 +13,7 @@ if not base_url:
 client = OpenAI(base_url=f"{base_url}/v1", api_key="unused")
 
 response = client.chat.completions.create(
-    model="Qwen/Qwen3.5-4B",
+    model="MiniMaxAI/MiniMax-M2.7",
     messages=[{"role": "user", "content": "Say hi in one short sentence."}],
     max_tokens=64,
     temperature=0.2,

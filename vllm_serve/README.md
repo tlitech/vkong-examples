@@ -1,55 +1,63 @@
-# vllm-serve — RTX 4090 + Qwen3.5-4B
+# MiniMax-M2.7 with vLLM — 4 × H100
+
+This example serves `MiniMaxAI/MiniMax-M2.7` through an OpenAI-compatible API.
+It follows the official vLLM TP4 recipe and keeps the model on one machine with four
+H100 GPUs.
 
 | | |
 |--|--|
-| **Image** | `vllm/vllm-openai:v0.26.0` (official) |
-| **GPU** | RTX 4090 × 1 |
-| **Model** | `Qwen/Qwen3.5-4B` |
+| **Image** | `vllm/vllm-openai:minimax27` |
+| **GPU** | H100 × 4 on one machine |
+| **Model** | `MiniMaxAI/MiniMax-M2.7` |
+| **Parallelism** | tensor parallel 4 + expert parallel |
+| **Context for this demo** | 32,768 tokens |
 
-Use a **ready image**, not a thin pytorch runtime + install hacks.
+The model needs about 220 GB for weights. The project requests 500 GB disk so the
+Hugging Face cache and image layers fit on a fresh rental.
 
-## Run
+## Run and deploy
 
 ```bash
 cd vllm_serve
-vkong run -C .
+vkong run -C . --detach
+vkong deploy -C .
 ```
 
-> **Note:** Local port changes each session. Check `vkong` output for the actual port (e.g. `http://127.0.0.1:50534`).
+The first run rents one four-GPU machine, downloads the model, and starts vLLM. It can
+take a while because the checkpoint is large and vLLM compiles GPU kernels on first
+start. `--detach` exits the CLI after the service is ready and keeps the rental running.
+The deploy command then publishes the stable App URL and exits after the URL is ready.
 
-When finished, run `vkong app stop vllm-serve` to destroy the active rental and stop billing.
-
-![vkong start](vkong-start.png)
+Follow setup and service output in the CLI or Dashboard → Apps → minimax-m27-vllm → Logs.
 
 ## Smoke test
 
 ```bash
-# List models
-curl -fsS http://127.0.0.1:<local-port>/v1/models | head -c 800
+export VKONG_URL=https://<url-printed-by-deploy>
 
-# Chat completion
-curl -fsS http://127.0.0.1:<local-port>/v1/chat/completions \
+curl -fsS "$VKONG_URL/v1/models"
+
+curl -fsS "$VKONG_URL/v1/chat/completions" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "Qwen/Qwen3.5-4B",
-    "messages": [{"role": "user", "content": "Say hi in one short sentence."}],
-    "max_tokens": 64,
-    "temperature": 0.2
+    "model": "MiniMaxAI/MiniMax-M2.7",
+    "messages": [{"role": "user", "content": "Reply with exactly: VKong MiniMax is ready"}],
+    "max_tokens": 32,
+    "temperature": 0
   }'
 ```
 
-## Python client
+Or use the Python client:
 
 ```bash
 pip install openai
-VKONG_URL=http://127.0.0.1:<local-port> python client.py
+VKONG_URL="$VKONG_URL" python client.py
 ```
 
-## Env (optional)
+Stop the App when testing is complete:
 
-| Variable | Default |
-|----------|---------|
-| `MODEL` | `Qwen/Qwen3.5-4B` |
-| `MAX_MODEL_LEN` | `2048` |
-| `GPU_MEMORY_UTILIZATION` | `0.9` |
-| `PORT` | `8000` (set by vkong) |
+```bash
+vkong app stop minimax-m27-vllm
+```
+
+Stopping the App releases all four GPUs and stops billing.
