@@ -1,4 +1,4 @@
-# hello_world — CPU example (ubuntu:24.04)
+# Hello World — CPU example
 
 Minimal FastAPI app on a CPU instance. All scripts are inline in `vkong.yaml`.
 
@@ -10,7 +10,7 @@ Minimal FastAPI app on a CPU instance. All scripts are inline in `vkong.yaml`.
 ## Run
 
 ```bash
-cd hello_world
+cd hello-world
 vkong run -C .
 ```
 

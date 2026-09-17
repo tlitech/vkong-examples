@@ -1,5 +1,5 @@
 type: service
-app: minimax-m27-vllm
+app: minimax-m27-vllm-multi-gpu
 gpu: H100
 num_gpus: 4
 cpu_cores: 32

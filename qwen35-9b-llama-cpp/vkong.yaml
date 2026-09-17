@@ -1,5 +1,5 @@
 type: service
-app: llama-cpp-serve
+app: qwen35-9b-llama-cpp
 gpu: RTX 4090
 num_gpus: 1
 cpu_cores: 8
@@ -10,7 +10,7 @@ max_dph: 2.5
 verified_only: true
 # Official llama.cpp server image with CUDA — llama-server preinstalled.
 image: ghcr.io/ggml-org/llama.cpp:server-cuda
-label: llamacpp-qwen3.5-9b
+label: qwen35-9b-llama-cpp
 app_port: 8080
 work_dir: .
 

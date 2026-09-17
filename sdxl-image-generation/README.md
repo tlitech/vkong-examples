@@ -1,10 +1,10 @@
-# Generate an image with SDXL
+# SDXL image generation
 
 This finite GPU task loads the compact SDXL-based `segmind/SSD-1B` model, generates
 one 768×768 image, writes it to `output.png`, prints its checksum, and exits.
 
 ```bash
-cd vkong-examples/sdxl_image
+cd vkong-examples/sdxl-image-generation
 vkong run -C .
 ```
 

@@ -1,5 +1,5 @@
 type: task
-app: sdxl-image
+app: sdxl-image-generation
 gpu: RTX 4090
 num_gpus: 1
 cpu_cores: 4
@@ -9,7 +9,7 @@ inet_down_mbps: 300
 max_dph: 1.5
 verified_only: true
 image: pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
-label: sdxl-image
+label: sdxl-image-generation
 work_dir: .
 
 init_cmd: |

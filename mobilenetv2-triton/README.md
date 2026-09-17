@@ -1,4 +1,4 @@
-# triton-serve — NVIDIA Triton Inference Server + MobileNetV2
+# MobileNetV2 with NVIDIA Triton
 
 | | |
 |--|--|
@@ -15,7 +15,7 @@ MobileNetV2 image classification served via the NVIDIA Triton Inference Server O
 ## Run
 
 ```bash
-cd triton_inference_server
+cd mobilenetv2-triton
 vkong run -C .
 ```
 
@@ -41,7 +41,7 @@ VKONG_URL=http://127.0.0.1:<local-port> python client.py test.jpg
 ## Stop the App
 
 ```bash
-vkong app stop triton-inference-server
+vkong app stop mobilenetv2-triton
 ```
 
 ### Demo

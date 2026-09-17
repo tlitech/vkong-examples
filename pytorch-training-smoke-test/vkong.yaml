@@ -1,5 +1,5 @@
 type: task
-app: mnist-training
+app: pytorch-training-smoke-test
 gpu: Any
 num_gpus: 1
 cpu_cores: 4
@@ -9,7 +9,7 @@ inet_down_mbps: 100
 max_dph: 1.0
 verified_only: true
 image: pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
-label: mnist-training
+label: pytorch-training-smoke-test
 work_dir: .
 
 init_cmd: |

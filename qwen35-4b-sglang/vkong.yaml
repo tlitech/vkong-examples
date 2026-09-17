@@ -1,5 +1,5 @@
 type: service
-app: sglang-serve
+app: qwen35-4b-sglang
 gpu: RTX 4090
 num_gpus: 1
 cpu_cores: 8
@@ -10,7 +10,7 @@ max_dph: 2.5
 verified_only: true
 # Official SGLang image: CUDA + torch + SGLang + toolchain preinstalled.
 image: lmsysorg/sglang:v0.5.17-cu129
-label: sglang-qwen3.5-4b
+label: qwen35-4b-sglang
 app_port: 30000
 work_dir: .
 

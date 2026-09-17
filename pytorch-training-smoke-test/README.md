@@ -1,10 +1,11 @@
-# Train MNIST
+# GPU training smoke test with PyTorch
 
-This finite task trains a small CNN for two epochs on MNIST, prints test accuracy,
-saves `mnist_cnn.pt`, and exits with the Python process status.
+Use this finite task to verify VKong's complete GPU training path: provision a GPU,
+run a small PyTorch CNN for two epochs, save a checkpoint, and exit cleanly. MNIST
+keeps the test fast and inexpensive; it is the test workload, not the point of the recipe.
 
 ```bash
-cd vkong-examples/mnist_training
+cd vkong-examples/pytorch-training-smoke-test
 vkong run -C .
 ```
 

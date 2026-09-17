@@ -1,4 +1,4 @@
-# llama-cpp-serve — Qwen3.5-9B on a rented GPU
+# Qwen3.5 9B with llama.cpp
 
 | | |
 |--|--|
@@ -16,7 +16,7 @@ vkong login --server https://vkong.tli-tech.com
 ## 2. Rent and run
 
 ```bash
-cd vkong-examples/llama_cpp_serve
+cd vkong-examples/qwen35-9b-llama-cpp
 
 vkong run -C .
 ```
@@ -28,7 +28,7 @@ What happens:
 - Starts `llama-server` on port 8080
 - Opens a local tunnel: `http://127.0.0.1:<port>`
 
-Note the local port from the output. vkong associates the rental with the configured `app: llama-cpp-serve`.
+Note the local port from the output. vkong associates the rental with the configured `app: qwen35-9b-llama-cpp`.
 
 The machine stays alive after Ctrl+C by default, so you can attach later without downloading the model again.
 
@@ -82,7 +82,7 @@ vkong deploy -C .
 ## 7. Stop the App
 
 ```bash
-vkong app stop llama-cpp-serve
+vkong app stop qwen35-9b-llama-cpp
 ```
 
 The active rental and its data are removed and billing stops. App history remains visible in the dashboard. The next `vkong run` starts a new App lifecycle.

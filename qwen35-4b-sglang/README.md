@@ -1,4 +1,4 @@
-# sglang-serve — RTX 4090 + Qwen3.5-4B
+# Qwen3.5 4B with SGLang
 
 | | |
 |--|--|
@@ -11,13 +11,13 @@ Use a **ready image**, not a thin pytorch runtime + install hacks.
 ## Run
 
 ```bash
-cd sglang_serve
+cd qwen35-4b-sglang
 vkong run -C .
 ```
 
 > **Note:** Local port changes each session. Check `vkong` output for the actual port (e.g. `http://127.0.0.1:50534`).
 
-When finished, run `vkong app stop sglang-serve` to destroy the active rental and stop billing.
+When finished, run `vkong app stop qwen35-4b-sglang` to destroy the active rental and stop billing.
 
 ## Smoke test
 

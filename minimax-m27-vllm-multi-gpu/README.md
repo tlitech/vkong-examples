@@ -1,4 +1,4 @@
-# MiniMax-M2.7 with vLLM — 4 × H100
+# MiniMax-M2.7 with vLLM (multi-GPU)
 
 This example serves `MiniMaxAI/MiniMax-M2.7` through an OpenAI-compatible API.
 It follows the official vLLM TP4 recipe and keeps the model on one machine with four
@@ -18,7 +18,7 @@ Hugging Face cache and image layers fit on a fresh rental.
 ## Run and deploy
 
 ```bash
-cd vllm_serve
+cd minimax-m27-vllm-multi-gpu
 vkong run -C . --detach
 vkong deploy -C .
 ```
@@ -28,7 +28,7 @@ take a while because the checkpoint is large and vLLM compiles GPU kernels on fi
 start. `--detach` exits the CLI after the service is ready and keeps the rental running.
 The deploy command then publishes the stable App URL and exits after the URL is ready.
 
-Follow setup and service output in the CLI or Dashboard → Apps → minimax-m27-vllm → Logs.
+Follow setup and service output in the CLI or Dashboard → Apps → minimax-m27-vllm-multi-gpu → Logs.
 
 ## Smoke test
 
@@ -57,7 +57,7 @@ VKONG_URL="$VKONG_URL" python client.py
 Stop the App when testing is complete:
 
 ```bash
-vkong app stop minimax-m27-vllm
+vkong app stop minimax-m27-vllm-multi-gpu
 ```
 
 Stopping the App releases all four GPUs and stops billing.
