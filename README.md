@@ -75,6 +75,7 @@ frameworks without becoming one long mixed list.
 
 | Recipe | Framework | Workload | Compute |
 |---|---|---|---:|
+| [Fine-tune SmolLM2 with Unsloth](smollm2-unsloth-finetuning) | Unsloth | 10-step LoRA fine-tune with a reusable model cache and checkpoint | 1× GPU |
 | [GPU training smoke test](pytorch-training-smoke-test) | PyTorch | Verify training, checkpoints, and task lifecycle with a small CNN | 1× GPU |
 
 ### Image generation

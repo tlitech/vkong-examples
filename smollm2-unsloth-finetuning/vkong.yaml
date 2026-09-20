@@ -1,0 +1,20 @@
+type: task
+app: smollm2-unsloth-finetuning
+gpu: Any
+num_gpus: 1
+cpu_cores: 4
+ram_gb: 16
+disk_gb: 50
+inet_down_mbps: 100
+max_dph: 0.60
+verified_only: true
+image: unsloth/unsloth:core-nightly-2026.09.18
+label: smollm2-unsloth-finetuning
+storage: unsloth-smollm2-lab
+cache:
+  - huggingface
+work_dir: .
+
+start_argv:
+  - python3
+  - train.py
