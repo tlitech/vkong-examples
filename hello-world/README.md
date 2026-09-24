@@ -1,26 +1,38 @@
-# Hello World — CPU example
+# Hello World with FastAPI
 
-Minimal FastAPI app on a CPU instance. All scripts are inline in `vkong.yaml`.
-
-| | |
-|--|--|
-| **Image** | `ubuntu:24.04` |
-| **GPU** | None (CPU only) |
+Run a small HTTP service on a CPU machine. The Python image already includes the runtime; setup installs only the app dependencies.
 
 ## Run
 
+From this repository's root, after `vkong login`:
+
 ```bash
 cd hello-world
-vkong run -C .
+vkong run
 ```
 
-> **Note:** Local port changes each session. Check `vkong` output for the actual port.
-
-When finished, run `vkong app stop hello-world` to destroy the active rental and stop billing.
-
-## Smoke test
+Keep the terminal open. Copy the local URL printed by VKong into a second terminal:
 
 ```bash
-curl -fsS http://127.0.0.1:<local-port>/
-# => {"ok": true, "service": "hello", "port": 8000}
+export VKONG_URL=http://127.0.0.1:<local-port>
+curl -fsS "$VKONG_URL/"
 ```
+
+## Run in the background
+
+Use `vkong run --detach` when starting a service that should outlive the terminal.
+To publish it at an HTTPS URL, run `vkong deploy` from this directory.
+Use that URL as `VKONG_URL` with the same client.
+
+## Stop
+
+```bash
+vkong app stop hello-world
+```
+
+This releases the machine and stops compute billing. If storage is attached,
+VKong saves the volume during a controlled stop; storage billing is separate.
+
+## Customize
+
+Edit `vkong.yaml` for compute requirements and the hourly price limit.

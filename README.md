@@ -29,7 +29,7 @@ git clone https://github.com/tlitech/vkong-examples.git
 cd vkong-examples/hello-world
 
 vkong login
-vkong run -C .
+vkong run
 ```
 
 VKong prints the local URL when the service is ready. Open it in a browser or
@@ -39,8 +39,8 @@ test it from another terminal:
 curl http://127.0.0.1:<local-port>/
 ```
 
-The machine remains active when you disconnect so you can attach again. Stop
-the App when you are finished to release its compute and stop billing:
+Use `vkong run --detach` when the workload should continue after the terminal
+closes. Stop the App when you are finished to release compute and stop billing:
 
 ```bash
 vkong app stop hello-world
@@ -76,7 +76,7 @@ frameworks without becoming one long mixed list.
 
 | Recipe | Framework | Workload | Compute |
 |---|---|---|---:|
-| [Fine-tune SmolLM2 with Unsloth](smollm2-unsloth-finetuning) | Unsloth | 10-step LoRA fine-tune with a reusable model cache and checkpoint | 1× GPU |
+| [Fine-tune SmolLM2 with Unsloth](smollm2-unsloth-finetuning) | Unsloth | 60-step LoRA fine-tune with a reusable model cache and checkpoint | 1× GPU |
 | [GPU training smoke test](pytorch-training-smoke-test) | PyTorch | Verify training, checkpoints, and task lifecycle with a small CNN | 1× GPU |
 
 ### Image generation
@@ -113,19 +113,19 @@ The important fields are:
 Run a recipe from its directory:
 
 ```bash
-vkong run -C .
+vkong run
 ```
 
 For a long-running task or service, detach after it starts:
 
 ```bash
-vkong run -C . --detach
+vkong run --detach
 ```
 
 For a finite task that should release compute when it exits:
 
 ```bash
-vkong run -C . --detach --auto-stop
+vkong run --detach --auto-stop
 ```
 
 See the [Getting Started guide](https://vkong.tli-tech.com/docs/getting-started)
@@ -139,7 +139,7 @@ From an existing project directory, generate a config and run it:
 ```bash
 cd my-project
 vkong new-config
-vkong run -C .
+vkong run
 ```
 
 Use these recipes as starting points: copy the closest `vkong.yaml`, then change
@@ -159,3 +159,20 @@ A useful recipe should:
 
 Open an issue or pull request with the workload, expected hardware, and the
 command used to verify it.
+
+## Recipe style
+
+Start each README with the result, then show **Run → Try → Stop**. Keep the first
+run short. Put optional cache, deployment, and tuning instructions afterwards.
+
+- Use an image with the framework already installed.
+- Group YAML fields under App, Compute, Budget, Storage (when used), and Runtime.
+- Keep YAML focused on compute, image, and a short setup/start command.
+- Let the framework download its model; set its cache location instead of writing a downloader.
+- Use `requirements.txt` for dependency lists and a small Python file for model conversion or preparation.
+- Keep necessary server options in a readable `serve.sh`; avoid shell installation fallbacks.
+- Explain whether output/cache is temporary or saved under `/data`.
+- Keep credentials in workspace secrets, and retain the example's price and resource limits.
+
+See the [Hugging Face cache settings](https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables)
+and [llama.cpp server options](https://github.com/ggml-org/llama.cpp/tree/master/tools/server).

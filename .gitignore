@@ -3,3 +3,10 @@
 # Python bytecode
 __pycache__/
 *.pyc
+
+# Local model caches and generated output
+.hf_cache/
+.llama_cache/
+models/mobilenetv2/1/
+output.png
+mnist_cnn.pt

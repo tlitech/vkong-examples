@@ -1,20 +1,27 @@
-type: task
+# App
+type: service
 app: smollm2-unsloth-finetuning
+app_port: 8000
+
+# Compute
 gpu: Any
 num_gpus: 1
 cpu_cores: 4
 ram_gb: 16
-disk_gb: 50
+disk_gb: 82
 inet_down_mbps: 100
+
+# Budget
 max_dph: 0.60
 verified_only: true
-image: unsloth/unsloth:core-nightly-2026.09.18
-label: smollm2-unsloth-finetuning
+
+# Storage
 storage: unsloth-smollm2-lab
 cache:
   - huggingface
-work_dir: .
 
+# Runtime
+image: unsloth/unsloth:core-nightly-2026.09.18
 start_argv:
   - python3
   - train.py

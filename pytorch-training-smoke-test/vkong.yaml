@@ -1,22 +1,22 @@
+# App
 type: task
 app: pytorch-training-smoke-test
+
+# Compute
 gpu: Any
 num_gpus: 1
 cpu_cores: 4
 ram_gb: 8
 disk_gb: 16
 inet_down_mbps: 100
+
+# Budget
 max_dph: 1.0
 verified_only: true
+
+# Runtime
 image: pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
-label: pytorch-training-smoke-test
-work_dir: .
-
-init_cmd: |
-  #!/usr/bin/env bash
-  set -euo pipefail
-  python3 -m pip install --quiet 'torchvision==0.22.1'
-
+init_cmd: python3 -m pip install 'torchvision==0.22.1'
 start_argv:
   - python3
   - train.py

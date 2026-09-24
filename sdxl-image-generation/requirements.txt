@@ -1,0 +1,5 @@
+diffusers>=0.35,<0.36
+transformers>=4.48,<5
+accelerate>=1.2,<2
+safetensors>=0.5,<1
+sentencepiece>=0.2,<1

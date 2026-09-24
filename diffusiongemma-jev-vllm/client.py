@@ -13,7 +13,6 @@ payload = {
         "ticket": "Production checkout is unavailable and a launch starts in 30 minutes.",
         "customer_impact": "All purchases fail.",
     },
-    "samples": 2,
     "questions": {
         "urgent": {
             "type": "noul",
@@ -30,7 +29,10 @@ payload = {
         },
     },
 }
-headers = {"content-type": "application/json"}
+headers = {
+    "content-type": "application/json",
+    "user-agent": "vkong-diffusiongemma-example/1.0",
+}
 if token := os.environ.get("API_KEY"):
     headers["authorization"] = f"Bearer {token}"
 request = urllib.request.Request(

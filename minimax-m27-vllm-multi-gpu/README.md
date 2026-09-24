@@ -1,63 +1,55 @@
-# MiniMax-M2.7 with vLLM (multi-GPU)
+# Serve MiniMax-M2.7 with vLLM
 
-This example serves `MiniMaxAI/MiniMax-M2.7` through an OpenAI-compatible API.
-It follows the official vLLM TP4 recipe and keeps the model on one machine with four
-H100 GPUs.
+Serve MiniMax-M2.7 on one machine with four H100 GPUs. vLLM downloads the weights and distributes inference across the GPUs.
 
-| | |
-|--|--|
-| **Image** | `vllm/vllm-openai:minimax27` |
-| **GPU** | H100 × 4 on one machine |
-| **Model** | `MiniMaxAI/MiniMax-M2.7` |
-| **Parallelism** | tensor parallel 4 + expert parallel |
-| **Context for this demo** | 32,768 tokens |
+## Run
 
-The model needs about 220 GB for weights. The project requests 500 GB disk so the
-Hugging Face cache and image layers fit on a fresh rental.
-
-## Run and deploy
+From this repository's root, after `vkong login`:
 
 ```bash
 cd minimax-m27-vllm-multi-gpu
-vkong run -C . --detach
-vkong deploy -C .
+vkong run
 ```
 
-The first run rents one four-GPU machine, downloads the model, and starts vLLM. It can
-take a while because the checkpoint is large and vLLM compiles GPU kernels on first
-start. `--detach` exits the CLI after the service is ready and keeps the rental running.
-The deploy command then publishes the stable App URL and exits after the URL is ready.
-
-Follow setup and service output in the CLI or Dashboard → Apps → minimax-m27-vllm-multi-gpu → Logs.
-
-## Smoke test
+Keep the terminal open. Copy the local URL printed by VKong into a second terminal:
 
 ```bash
-export VKONG_URL=https://<url-printed-by-deploy>
-
-curl -fsS "$VKONG_URL/v1/models"
-
-curl -fsS "$VKONG_URL/v1/chat/completions" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "MiniMaxAI/MiniMax-M2.7",
-    "messages": [{"role": "user", "content": "Reply with exactly: VKong MiniMax is ready"}],
-    "max_tokens": 32,
-    "temperature": 0
-  }'
+export VKONG_URL=http://127.0.0.1:<local-port>
+python3 -m pip install openai
+python3 client.py
 ```
 
-Or use the Python client:
+## Run in the background
 
-```bash
-pip install openai
-VKONG_URL="$VKONG_URL" python client.py
-```
+Use `vkong run --detach` when starting a service that should outlive the terminal.
+To publish it at an HTTPS URL, run `vkong deploy` from this directory.
+Use that URL as `VKONG_URL` with the same client.
 
-Stop the App when testing is complete:
+## Stop
 
 ```bash
 vkong app stop minimax-m27-vllm-multi-gpu
 ```
 
-Stopping the App releases all four GPUs and stops billing.
+This releases the machine and stops compute billing. If storage is attached,
+VKong saves the volume during a controlled stop; storage billing is separate.
+
+## Keep the model cache
+
+By default the cache lasts for this rental. To save it between machines, add
+these fields to `vkong.yaml` before starting:
+
+```yaml
+storage: minimax-m27-vllm-multi-gpu-cache
+cache: [huggingface]
+```
+
+VKong mounts the volume at `/data` and sets the framework's cache location.
+The framework handles model downloads. A new machine restores the saved cache;
+it does not mount it lazily. Saved cache bytes count toward storage usage.
+Choose enough `disk_gb` for the runtime, restored data, and headroom.
+
+## Customize
+
+Edit `vkong.yaml` for compute requirements and the hourly price limit.
+This example requests four GPUs and up to $16/hour for the machine. Review `max_dph` before starting. The 500 GB disk accommodates the large model and runtime. Multi-GPU availability and compatibility still need a live run; do not treat this recipe as a completed provider proof.

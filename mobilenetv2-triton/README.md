@@ -1,68 +1,40 @@
-# MobileNetV2 with NVIDIA Triton
+# Classify images with MobileNetV2 and Triton
 
-| | |
-|--|--|
-| **Image** | `nvcr.io/nvidia/tritonserver:26.07-py3` |
-| **GPU** | RTX 4090 × 1 |
-| **Model** | MobileNetV2 (ONNX, ImageNet 1001-class) |
-
-The start command uses `/opt/tritonserver/bin/tritonserver` explicitly because vkong's
-SSH-less agent replaces the image entrypoint and provider environments do not guarantee
-that Triton's bin directory remains on `PATH`.
-
-MobileNetV2 image classification served via the NVIDIA Triton Inference Server ONNX Runtime backend.
+Serve an ONNX image classifier on one RTX 4090. `prepare_model.py` downloads the weights into the directory layout required by Triton.
 
 ## Run
 
+From this repository's root, after `vkong login`:
+
 ```bash
 cd mobilenetv2-triton
-vkong run -C .
+vkong run
 ```
 
-> **Note:** The local tunnel URL changes each session. Check `vkong` output, for example `http://127.0.0.1:50534`. The machine stays running after Ctrl+C by default, so stop the App when you finish.
-
-## Smoke test
+Keep the terminal open. Copy the local URL printed by VKong into a second terminal:
 
 ```bash
-# Server health
-curl -fsS http://127.0.0.1:<local-port>/v2/health/ready
-
-# Model metadata
-curl -fsS http://127.0.0.1:<local-port>/v2/models/mobilenetv2
+export VKONG_URL=http://127.0.0.1:<local-port>
+python3 -m pip install requests numpy Pillow
+python3 client.py test.jpg
 ```
 
-## Python client
+## Run in the background
 
-```bash
-pip install requests numpy Pillow
-VKONG_URL=http://127.0.0.1:<local-port> python client.py test.jpg
-```
+Use `vkong run --detach` when starting a service that should outlive the terminal.
+To publish it at an HTTPS URL, run `vkong deploy` from this directory.
+Use that URL as `VKONG_URL` with the same client.
 
-## Stop the App
+## Stop
 
 ```bash
 vkong app stop mobilenetv2-triton
 ```
 
-### Demo
+This releases the machine and stops compute billing. If storage is attached,
+VKong saves the volume during a controlled stop; storage billing is separate.
 
-![test.jpg](test.jpg)
+## Customize
 
-```
-Top-5 predictions for test.jpg:
-  1. gorilla                         97.2%
-  2. gibbon                          0.2%
-  3. siamang                         0.1%
-  4. chimpanzee                      0.1%
-  5. patas                           0.0%
-```
-
-## Model repository
-
-```text
-models/
-└── mobilenetv2/
-    ├── config.pbtxt     # onnxruntime, input [1,3,224,224], output [-1,1001]
-    └── 1/
-        └── model.onnx   # downloaded by init_cmd from HuggingFace (~14MB)
-```
+Edit `vkong.yaml` for compute requirements and the hourly price limit.
+`models/mobilenetv2/config.pbtxt` defines the inputs and outputs. Triton needs an explicit model repository, so this recipe has a short preparation script.

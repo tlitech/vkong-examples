@@ -1,108 +1,55 @@
-# Qwen3.5 9B with llama.cpp
+# Chat with Qwen3.5 9B and llama.cpp
 
-| | |
-|--|--|
-| **Image** | `ghcr.io/ggml-org/llama.cpp:server-cuda` (official) |
-| **GPU** | RTX 4090 x1 (24 GB VRAM; available on both supported backends) |
-| **Model** | `unsloth/Qwen3.5-9B-GGUF` — Q4_K_M (~5.7 GB) |
-| **API** | OpenAI-compatible (`/v1/chat/completions`, `/v1/models`) |
+Serve the Q4_K_M version of Qwen3.5-9B on one RTX 4090. llama.cpp downloads the selected GGUF directly from Hugging Face.
 
-## 1. Login (one-time)
+## Run
+
+From this repository's root, after `vkong login`:
 
 ```bash
-vkong login --server https://vkong.tli-tech.com
+cd qwen35-9b-llama-cpp
+vkong run
 ```
 
-## 2. Rent and run
+Keep the terminal open. Copy the local URL printed by VKong into a second terminal:
 
 ```bash
-cd vkong-examples/qwen35-9b-llama-cpp
-
-vkong run -C .
+export VKONG_URL=http://127.0.0.1:<local-port>
+python3 -m pip install requests
+python3 client.py
 ```
 
-What happens:
-- Searches for an RTX 4090 that matches the config on the selected backend
-- Rents a matching machine
-- Downloads the GGUF model (~5.7 GB, first time only)
-- Starts `llama-server` on port 8080
-- Opens a local tunnel: `http://127.0.0.1:<port>`
+## Run in the background
 
-Note the local port from the output. vkong associates the rental with the configured `app: qwen35-9b-llama-cpp`.
+Use `vkong run --detach` when starting a service that should outlive the terminal.
+To publish it at an HTTPS URL, run `vkong deploy` from this directory.
+Use that URL as `VKONG_URL` with the same client.
 
-The machine stays alive after Ctrl+C by default, so you can attach later without downloading the model again.
-
-## 3. Test the API
-
-```bash
-# List models
-curl -s http://127.0.0.1:<port>/v1/models | python3 -m json.tool
-
-# Chat completion
-curl -s http://127.0.0.1:<port>/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "qwen3.5-9b",
-    "messages": [{"role":"user","content":"Say hi in one short sentence."}],
-    "max_tokens": 64
-  }'
-```
-
-## 4. Python client (streaming)
-
-```bash
-pip install requests
-VKONG_URL=http://127.0.0.1:<local-port> python client.py
-```
-
-## 5. Dev workflow
-
-After Ctrl+C, the machine is still running. You don't need to `vkong run` again.
-
-```bash
-# Re-open tunnel only (app still running on machine, instant)
-vkong attach vk_xxxx -C .
-
-# Re-sync code + restart llama-server (~1-5 min model reload)
-vkong attach vk_xxxx -C . --update
-
-# Check what machines you have running
-vkong instances
-```
-
-**Use `--watch` carefully** for LLM services: every file save restarts the server and reloads model weights, which can take minutes.
-
-## 6. Publish a public URL (optional)
-
-```bash
-vkong deploy -C .
-# Output: public_url=https://<random>-deploy.tli-tech.com
-```
-
-## 7. Stop the App
+## Stop
 
 ```bash
 vkong app stop qwen35-9b-llama-cpp
 ```
 
-The active rental and its data are removed and billing stops. App history remains visible in the dashboard. The next `vkong run` starts a new App lifecycle.
+This releases the machine and stops compute billing. If storage is attached,
+VKong saves the volume during a controlled stop; storage billing is separate.
 
-## Use a different model
+## Keep the model cache
 
-```bash
-REPO=TheBloke/Mistral-7B-Instruct-v0.2-GGUF \
-MODEL_FILE=mistral-7b-instruct-v0.2.Q4_K_M.gguf \
-vkong run -C .
+By default the cache lasts for this rental. To save it between machines, add
+these fields to `vkong.yaml` before starting:
+
+```yaml
+storage: qwen35-9b-llama-cpp-cache
+cache: [huggingface, llama-cpp]
 ```
 
-Or edit the defaults directly in `vkong.yaml`.
+VKong mounts the volume at `/data` and sets the framework's cache location.
+The framework handles model downloads. A new machine restores the saved cache;
+it does not mount it lazily. Saved cache bytes count toward storage usage.
+Choose enough `disk_gb` for the runtime, restored data, and headroom.
 
-## Env reference
+## Customize
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `REPO` | `unsloth/Qwen3.5-9B-GGUF` | Hugging Face repo |
-| `MODEL_FILE` | `Qwen3.5-9B-Q4_K_M.gguf` | GGUF filename |
-| `N_GPU_LAYERS` | `999` | GPU layers (999 = all) |
-| `CTX_SIZE` | `4096` | Context window |
-| `PORT` | `8080` | Server port (set by vkong) |
+Edit `vkong.yaml` for compute requirements and the hourly price limit.
+Change the repository, GGUF filename, or context size in `serve.sh`. The API model name is `qwen3.5-9b`.

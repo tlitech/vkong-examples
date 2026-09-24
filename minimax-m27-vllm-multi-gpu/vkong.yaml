@@ -1,53 +1,20 @@
+# App
 type: service
 app: minimax-m27-vllm-multi-gpu
+app_port: 8000
+
+# Compute
 gpu: H100
 num_gpus: 4
 cpu_cores: 32
 ram_gb: 128
 disk_gb: 500
 inet_down_mbps: 1000
+
+# Budget
 max_dph: 16
 verified_only: false
+
+# Runtime
 image: vllm/vllm-openai:minimax27
-label: minimax-m27-tp4
-app_port: 8000
-work_dir: .
-
-init_cmd: |
-  #!/usr/bin/env bash
-  set -euo pipefail
-  export HF_HOME="${HF_HOME:-$PWD/.hf_cache}"
-  export HUGGINGFACE_HUB_CACHE="${HUGGINGFACE_HUB_CACHE:-$HF_HOME/hub}"
-  mkdir -p "$HUGGINGFACE_HUB_CACHE"
-  MODEL="${MODEL:-MiniMaxAI/MiniMax-M2.7}"
-  echo "[init] downloading $MODEL"
-  python3 - <<'PY'
-  import os
-  from huggingface_hub import snapshot_download
-
-  path = snapshot_download(
-      repo_id=os.environ.get("MODEL", "MiniMaxAI/MiniMax-M2.7"),
-      max_workers=16,
-  )
-  print(f"[init] model ready: {path}")
-  PY
-
-start: |
-  #!/usr/bin/env bash
-  set -euo pipefail
-  export HF_HOME="${HF_HOME:-$PWD/.hf_cache}"
-  export HUGGINGFACE_HUB_CACHE="${HUGGINGFACE_HUB_CACHE:-$HF_HOME/hub}"
-  PORT="${PORT:-8000}"
-  MODEL="${MODEL:-MiniMaxAI/MiniMax-M2.7}"
-  echo "[start] vLLM $MODEL on 4x H100 :$PORT"
-  exec vllm serve "$MODEL" \
-    --host 0.0.0.0 \
-    --port "$PORT" \
-    --tensor-parallel-size 4 \
-    --enable-expert-parallel \
-    --tool-call-parser minimax_m2 \
-    --reasoning-parser minimax_m2 \
-    --enable-auto-tool-choice \
-    --trust-remote-code \
-    --max-model-len "${MAX_MODEL_LEN:-32768}" \
-    --gpu-memory-utilization "${GPU_MEMORY_UTILIZATION:-0.90}"
+start: bash serve.sh

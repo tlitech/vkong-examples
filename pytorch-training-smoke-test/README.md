@@ -1,20 +1,39 @@
-# GPU training smoke test with PyTorch
+# Train a small CNN with PyTorch
 
-Use this finite task to verify VKong's complete GPU training path: provision a GPU,
-run a small PyTorch CNN for two epochs, save a checkpoint, and exit cleanly. MNIST
-keeps the test fast and inexpensive; it is the test workload, not the point of the recipe.
+Train a small CNN on MNIST for two epochs and print its test accuracy. Torchvision downloads the dataset automatically. This is a short check of GPU training and task completion.
 
-```bash
-cd vkong-examples/pytorch-training-smoke-test
-vkong run -C .
-```
+## Run
 
-Use `--detach` to leave the training process running after the CLI returns. Add
-`--auto-stop` when vkong should destroy the GPU as soon as training finishes:
+From this repository's root, after `vkong login`:
 
 ```bash
-vkong run -C . --detach --auto-stop
+cd pytorch-training-smoke-test
+vkong run
 ```
 
-The current CLI retains the training logs but does not download checkpoints yet. Without
-`--auto-stop`, `mnist_cnn.pt` remains in the remote workspace while the rental is active.
+The task prints its result and exits. Its `mnist_cnn.pt` stays in the remote
+project directory while the machine is active.
+
+## Keep the output
+
+For durable output, add `storage: pytorch-training-smoke-test-data` to `vkong.yaml` and
+change the output path in the Python script to `/data/mnist_cnn.pt` before running.
+Allow enough `disk_gb` for the runtime and restored data. After a successful run,
+stop the App to save the volume, then download the saved file:
+
+```bash
+vkong app stop pytorch-training-smoke-test
+vkong storage download pytorch-training-smoke-test-data mnist_cnn.pt -o mnist_cnn.pt
+```
+
+Storage only saves files under `/data`. The default project-directory output
+is temporary and is removed when the machine is destroyed.
+
+## Stop
+
+```bash
+vkong app stop pytorch-training-smoke-test
+```
+
+For a smoke run whose output can be discarded, use `vkong run --auto-stop`
+to release compute when the task finishes.
