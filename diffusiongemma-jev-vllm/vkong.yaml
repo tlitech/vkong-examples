@@ -1,0 +1,40 @@
+type: service
+app: diffusiongemma-jev-vllm
+gpu: H100
+num_gpus: 1
+cpu_cores: 16
+ram_gb: 64
+disk_gb: 180
+inet_down_mbps: 1000
+max_dph: 4.0
+verified_only: true
+# vLLM nightly commit with DiffusionGemma structured-read support, pinned to
+# the exact Linux/amd64 manifest rather than a mutable nightly tag.
+image: vllm/vllm-openai@sha256:e0eee5c5506bea9bfe350f7d99b07dc49e37d42647a128c2a57ff184551fba10
+label: diffusiongemma-jev
+app_port: 8011
+work_dir: .
+
+init_cmd: |
+  #!/usr/bin/env bash
+  set -euo pipefail
+  export HF_HOME="${HF_HOME:-$PWD/.hf_cache}"
+  export HUGGINGFACE_HUB_CACHE="${HUGGINGFACE_HUB_CACHE:-$HF_HOME/hub}"
+  MODEL="${MODEL:-google/diffusiongemma-26B-A4B-it}"
+  MODEL_REVISION="${MODEL_REVISION:-f7f5b7f5fa82ffc52addd066915886d497f5517b}"
+  export MODEL MODEL_REVISION
+  mkdir -p "$HUGGINGFACE_HUB_CACHE"
+  echo "[init] downloading $MODEL at $MODEL_REVISION"
+  python3 - <<'PY'
+  import os
+  from huggingface_hub import snapshot_download
+
+  path = snapshot_download(
+      repo_id=os.environ.get("MODEL", "google/diffusiongemma-26B-A4B-it"),
+      revision=os.environ.get("MODEL_REVISION", "f7f5b7f5fa82ffc52addd066915886d497f5517b"),
+      max_workers=16,
+  )
+  print(f"[init] model ready: {path}")
+  PY
+
+start: bash start.sh

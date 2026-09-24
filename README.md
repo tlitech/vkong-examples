@@ -63,6 +63,7 @@ frameworks without becoming one long mixed list.
 |---|---|---:|---|
 | [Qwen3.5 9B with llama.cpp](qwen35-9b-llama-cpp) | Qwen3.5-9B GGUF | 1× RTX 4090 | OpenAI-compatible API |
 | [Qwen3.5 4B with SGLang](qwen35-4b-sglang) | Qwen3.5-4B | 1× RTX 4090 | OpenAI-compatible API |
+| [DiffusionGemma with Jev and vLLM](diffusiongemma-jev-vllm) | DiffusionGemma 26B-A4B | 1× H100 80 GB | Jev structured decisions + OpenAI-compatible API |
 | [MiniMax-M2.7 with vLLM (multi-GPU)](minimax-m27-vllm-multi-gpu) | MiniMax-M2.7 | 4× H100 | OpenAI-compatible API, tensor and expert parallelism |
 
 ### Model serving
