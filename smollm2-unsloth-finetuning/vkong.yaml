@@ -1,7 +1,6 @@
 # App
-type: service
+type: task
 app: smollm2-unsloth-finetuning
-app_port: 8000
 
 # Compute
 gpu: Any
@@ -17,8 +16,7 @@ verified_only: true
 
 # Storage
 storage: unsloth-smollm2-lab
-cache:
-  - huggingface
+cache: [huggingface]
 
 # Runtime
 image: unsloth/unsloth:core-nightly-2026.09.18

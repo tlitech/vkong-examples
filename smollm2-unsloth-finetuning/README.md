@@ -1,41 +1,84 @@
 # Fine-tune SmolLM2 with Unsloth
 
-Run a small but real LoRA fine-tuning job with
-[`unsloth/SmolLM2-135M-Instruct`](https://huggingface.co/unsloth/SmolLM2-135M-Instruct)
-and 64 public examples from `yahma/alpaca-cleaned`. The model is about 269 MB and
-the recipe follows Unsloth's quick-tutorial duration of 60 training steps, making it
-useful for validating a complete GPU training and checkpoint workflow.
+Train a LoRA adapter for `unsloth/SmolLM2-135M-Instruct` on the full `train`
+split of `yahma/alpaca-cleaned`. The default runs **one complete epoch**, saves
+resumable checkpoints and the final adapter, packages the result, then exits.
+There is no download server or fixed 60-step test limit.
+
+## Run
+
+From the examples repository:
 
 ```bash
-cd vkong-examples/smollm2-unsloth-finetuning
-vkong run --detach
+cd smollm2-unsloth-finetuning
+vkong run --detach --auto-stop
 ```
 
-VKong creates the `unsloth-smollm2-lab` volume automatically and mounts it at
-`/data`. The Hugging Face cache, resumable checkpoints at steps 20, 40, and 60, final
-LoRA adapter, and completion marker all stay on that volume. Once the GPU stops, VKong
-saves the volume.
+The job continues after the CLI returns. On completion, VKong saves the attached
+volume and releases compute. Saving takes time and remains billable until the
+machine is released; storage billing continues separately.
 
-This recipe stays online after training to serve the download. Stop the App explicitly
-when finished.
-
-After step 60, the recipe packages only the final checkpoint, LoRA adapter, and metadata
-as `smollm2-unsloth-checkpoint-60.tar.gz`. Reconnect to the detached service, then use the
-private localhost URL printed by VKong to download it:
+To follow training, use the instance ID printed by the run command:
 
 ```bash
-vkong attach vk_<id>
-curl -O http://127.0.0.1:<port>/smollm2-unsloth-checkpoint-60.tar.gz
-vkong app stop smollm2-unsloth-finetuning
+vkong attach <instance-id>
 ```
 
-Keep `vkong attach` running while `curl` downloads the archive. The tunnel is private and
-the service exposes only the archive directory, not the whole volume. Stop the App after
-the download so VKong performs the controlled final save and releases the GPU.
+Closing an established attach session leaves the detached job running. To stop
+early, use `vkong app stop smollm2-unsloth-finetuning`. Resume recovers from the
+last complete saved checkpoint, not from unsaved GPU memory.
 
-Run the same command again to test restore on a fresh machine. The script validates the
-saved adapter and prints `storage restore verified` instead of training again.
+## Checkpoints and final adapter
 
-The recipe asks for 82 GB of machine disk because VKong must fit the container image,
-runtime files, and restored volume on the rented machine. Durable storage is billed by
-the volume's actual allocated size, separately from GPU compute.
+All outputs live in `/data/smollm2-unsloth-full` on volume `unsloth-smollm2-lab`:
+
+- `checkpoints/checkpoint-<step>/`: LoRA weights, tokenizer, optimizer, scheduler,
+  RNG and Trainer state. Saves every 500 optimizer steps and at the final step;
+  retains the latest two checkpoints. Trainer also saves the AMP scaler when used.
+- `final-adapter/`: adapter and tokenizer for inference with the original base model.
+- `training-complete.json`: summary written after final checkpoint validation.
+- `download/smollm2-unsloth-checkpoint.tar.gz`: final checkpoint, adapter and summary.
+
+The checkpoint is for resuming this LoRA run. It does not contain a merged copy
+of the base model. The final adapter alone does not contain optimizer state.
+
+Running again with the same settings resumes an unfinished run. If the latest
+checkpoint is incomplete, the script fails instead of silently starting over;
+recover an earlier complete checkpoint before retrying. A completed run verifies
+its files, rebuilds the archive and exits without training again.
+
+## Download after saving
+
+First check that the volume's latest save has completed successfully:
+
+```bash
+vkong storage show unsloth-smollm2-lab
+```
+
+Then download the archive without keeping a GPU online:
+
+```bash
+vkong storage download unsloth-smollm2-lab smollm2-unsloth-full/download/smollm2-unsloth-checkpoint.tar.gz
+```
+
+A stop acknowledgment is not confirmation that saving finished. Downloads read
+the latest completed save, so check its time and status before downloading.
+
+## Adjust training
+
+Edit `train.py`: `NUM_TRAIN_EPOCHS` controls full passes through the selected data,
+`DATASET` / `DATASET_SPLIT` select the data, and `SAVE_STEPS` controls checkpoint
+frequency. The default uses the whole training split; sequences are limited to
+512 tokens. Longer examples are subject to the trainer's sequence-length handling.
+
+Keep the same model, data and training settings when resuming. For a new experiment,
+choose a fresh `OUTPUT` directory, and update the download path accordingly. The new
+directory is separate from the old `/data/smollm2-unsloth-60-step` test output.
+
+Hugging Face downloads the model and dataset into its cache. VKong preserves that
+cache under `/data` through `cache: [huggingface]`. The recipe requests 82 GB disk;
+VKong checks available storage headroom before renting.
+
+This full-dataset task has been checked locally; its new training duration,
+GPU memory use and end-to-end resume still require a GPU run. The old 60-step
+service test is not evidence for this updated recipe.
