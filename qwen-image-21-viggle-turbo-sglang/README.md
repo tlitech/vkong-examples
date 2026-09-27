@@ -90,28 +90,32 @@ input for an image-edit request.
 <table>
   <tr>
     <td align="center">
-      <img src="assets/generate_512x512.png" alt="Generated glass astronaut helmet at 512 by 512" width="360"><br>
+      <a href="assets/generate_512x512.png"><img src="assets/generate_512x512.png" alt="Generated glass astronaut helmet at 512 by 512" width="360"></a><br>
       <strong>Generate · 512×512</strong>
     </td>
     <td align="center">
-      <img src="assets/generate_1024x1024.png" alt="Generated glass astronaut helmet at 1024 by 1024" width="360"><br>
+      <a href="assets/generate_1024x1024.png"><img src="assets/generate_1024x1024.png" alt="Generated glass astronaut helmet at 1024 by 1024" width="360"></a><br>
       <strong>Generate · 1024×1024</strong>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="assets/generate_1536x1024.png" alt="Generated glass astronaut helmet at 1536 by 1024" width="360"><br>
+      <a href="assets/generate_1536x1024.png"><img src="assets/generate_1536x1024.png" alt="Generated glass astronaut helmet at 1536 by 1024" width="360"></a><br>
       <strong>Generate · 1536×1024</strong>
     </td>
     <td align="center">
-      <img src="assets/generate_1536x1536.png" alt="Generated glass astronaut helmet at 1536 by 1536" width="360"><br>
+      <a href="assets/generate_1536x1536.png"><img src="assets/generate_1536x1536.png" alt="Generated glass astronaut helmet at 1536 by 1536" width="360"></a><br>
       <strong>Generate · 1536×1536</strong>
     </td>
   </tr>
   <tr>
-    <td align="center" colspan="2">
-      <img src="assets/edit_from_generate_1536x1536.png" alt="Edited glass astronaut helmet with a paper crane reflected in the visor" width="360"><br>
-      <strong>Edit from 1536×1536 input · 1024×1024 output</strong>
+    <td align="center">
+      <a href="assets/generate_1536x1536.png"><img src="assets/generate_1536x1536.png" alt="1536 by 1536 input image used for image editing" width="360"></a><br>
+      <strong>Edit input · 1536×1536</strong>
+    </td>
+    <td align="center">
+      <a href="assets/edit_from_generate_1536x1536.png"><img src="assets/edit_from_generate_1536x1536.png" alt="Edited glass astronaut helmet with a paper crane reflected in the visor" width="360"></a><br>
+      <strong>Edited output · 1024×1024</strong>
     </td>
   </tr>
 </table>
