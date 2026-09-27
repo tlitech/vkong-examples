@@ -1,4 +1,5 @@
 .hf_cache/
 __pycache__/
+benchmarks/
 benchmark-output/
 output.png
