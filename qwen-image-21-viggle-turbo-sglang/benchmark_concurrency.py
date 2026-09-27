@@ -10,6 +10,7 @@ run sequentially so the reported wall time and throughput are easy to interpret.
 """
 
 import argparse
+import math
 import base64
 import concurrent.futures
 import json
@@ -27,7 +28,7 @@ def percentile(values, p):
     if not values:
         return None
     ordered = sorted(values)
-    index = max(0, min(len(ordered) - 1, int((len(ordered) - 1) * p)))
+    index = max(0, min(len(ordered) - 1, math.ceil(len(ordered) * p) - 1))
     return round(ordered[index], 3)
 
 
