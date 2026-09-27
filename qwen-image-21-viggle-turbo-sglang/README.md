@@ -132,6 +132,22 @@ To repeat the same workload:
 python3 benchmark.py --output-dir benchmark-output
 ```
 
+For a concurrent load test, `benchmark_concurrency.py` distributes a total request
+count across sequential concurrency levels and records per-request timing plus
+throughput summaries:
+
+```bash
+VKONG_URL=https://<your-app-url> python3 benchmark_concurrency.py \
+  --total 100 --concurrencies 1,2,3,4,5,6,7,8 --size 512x512
+```
+
+A 100-request RTX 4090 run by **tsdocode** is documented in
+[`benchmark-results-tsdocode-2026-09-27.md`](benchmark-results-tsdocode-2026-09-27.md),
+with per-request measurements in the adjacent JSON file. It achieved 100/100
+successful requests; throughput increased from 0.398 images/s at concurrency 1
+to approximately 0.74–0.77 images/s at concurrency 2–8, while per-request latency
+rose as concurrent requests queued. This is one warmed-up run, not an SLA.
+
 ## Runtime notes
 
 - The recipe requests one verified RTX 4090, 64 GB system RAM, and 100 GB disk.
