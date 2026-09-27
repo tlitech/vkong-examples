@@ -1,0 +1,20 @@
+]11;?\[6n→ Checking project
+✓ Project checked
+  [debug] connecting to control plane
+  [debug] control plane session ready
+→ Finding a machine
+  [debug] search gpu=A100 80GB max=$2.00
+✓ Machine selected · A100 80GB · 100 GB disk · $1.604/hour
+  [debug] offer selected gpu=A100 80GB count=1 $1.604/hr total
+→ Starting the machine
+  [debug] start attempt=1
+  [debug] machine ordered id=vk_a3c4d4270b1124c2 status=running
+  [debug] waiting for machine id=vk_a3c4d4270b1124c2
+  [debug] machine phase: phase=agent_starting ready=false status=running container up — waiting for session agent to register
+  [debug] status check failed; retrying: failed: connection lost
+  [debug] control reconnected
+^C✓ run canceled · foreground work stopped
+  [debug] client interrupted foreground run
+Machine: vk_a3c4d4270b1124c2
+Reconnect: vkong attach vk_a3c4d4270b1124c2
+GPU and billing continue until: vkong app stop qwen21-viggle-runpod-verified-a100-20260927

@@ -1,0 +1,35 @@
+]11;?\[6n→ Checking project
+✓ Project checked
+  [debug] connecting to control plane
+  [debug] control plane session ready
+→ Finding a machine
+  [debug] search gpu=RTX 5090 max=$2.00
+  [debug] no matching machine; retrying attempt=1
+  [debug] no matching machine; retrying attempt=2
+  [debug] no matching machine; retrying attempt=3
+  [debug] no matching machine; retrying attempt=4
+  [debug] no matching machine; retrying attempt=5
+  [debug] no matching machine; retrying attempt=6
+  [debug] no matching machine; retrying attempt=7
+✓ Machine selected · RTX 5090 32GB · 100 GB disk · $0.704/hour
+  [debug] offer selected gpu=RTX 5090 32GB count=1 $0.704/hr total
+→ Starting the machine
+  [debug] start attempt=8
+  [debug] machine ordered id=vk_0ac027e6d6015c06 status=running
+  [debug] waiting for machine id=vk_0ac027e6d6015c06
+  [debug] machine phase: phase=agent_starting ready=false status=running container up — waiting for session agent to register
+  [debug] machine phase: phase=ready ready=true status=running machine ready
+✓ Machine ready · vk_0ac027e6d6015c06
+  [debug] preparing machine session
+  [debug] machine session ready
+  [debug] connecting to machine session
+  [debug] machine session workspace acknowledged
+→ Preparing the project
+  [debug] stopping previous workload before project sync
+  [debug] syncing project files
+  [debug] sync| preflight: 21 files, 13.3 MiB
+  [debug] sync| upload 21 / 21 files (workers=6)
+Machine: vk_0ac027e6d6015c06
+Inspect logs: vkong attach vk_0ac027e6d6015c06
+GPU and billing continue until: vkong app stop qwen-image-21-viggle-turbo-sglang
+✗ file sync failed: benchmarks/2026-09-27-marketplace-rtx4090/diagnostic_curl_512x512.png: machine session closed: invalid character '-' after top-level value

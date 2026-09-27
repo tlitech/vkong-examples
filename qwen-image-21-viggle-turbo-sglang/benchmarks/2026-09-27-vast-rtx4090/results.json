@@ -1,0 +1,69 @@
+[
+  {
+    "label": "generate_512x512",
+    "http_status": 200,
+    "elapsed_seconds": 3.461,
+    "server_inference_seconds": 1.7071375001687557,
+    "non_inference_overhead_seconds": 1.754,
+    "request_bytes": 293,
+    "response_bytes": 658112,
+    "image_bytes": 493247,
+    "sha256": "24f5cfcfd3bad1bb02592ce0ba6553e8133240eebcc69f74579b792e817be5f4",
+    "output": "generate_512x512.png",
+    "peak_memory_mb": 19084.0
+  },
+  {
+    "label": "generate_1024x1024",
+    "http_status": 200,
+    "elapsed_seconds": 6.403,
+    "server_inference_seconds": 3.815461714984849,
+    "non_inference_overhead_seconds": 2.587,
+    "request_bytes": 295,
+    "response_bytes": 2954843,
+    "image_bytes": 2215796,
+    "sha256": "db18ecf5aa1f061acd49edef8ef19b9a6fa316a3870a10a259df4487361791f4",
+    "output": "generate_1024x1024.png",
+    "peak_memory_mb": 22912.0
+  },
+  {
+    "label": "generate_1536x1024",
+    "http_status": 200,
+    "elapsed_seconds": 8.868,
+    "server_inference_seconds": 6.183302992023528,
+    "non_inference_overhead_seconds": 2.684,
+    "request_bytes": 295,
+    "response_bytes": 4135571,
+    "image_bytes": 3101343,
+    "sha256": "6eb23d4168e0e3cd3d09bbdf71b5a1d9c75cd002e3f02b9f70f1c5010924d26c",
+    "output": "generate_1536x1024.png",
+    "peak_memory_mb": 22848.0
+  },
+  {
+    "label": "generate_1536x1536",
+    "http_status": 200,
+    "elapsed_seconds": 11.677,
+    "server_inference_seconds": 8.90694070304744,
+    "non_inference_overhead_seconds": 2.77,
+    "request_bytes": 295,
+    "response_bytes": 6865542,
+    "image_bytes": 5148822,
+    "sha256": "b0bb34436e533c842f4a5b4f23a480aef3f0886d736170acc5bac1764d60d333",
+    "output": "generate_1536x1536.png",
+    "peak_memory_mb": 23074.0
+  },
+  {
+    "label": "edit_from_generate_1536x1536",
+    "http_status": 200,
+    "elapsed_seconds": 27.292,
+    "server_inference_seconds": 5.233740201918408,
+    "non_inference_overhead_seconds": 22.058,
+    "request_bytes": 5149777,
+    "response_bytes": 3206141,
+    "image_bytes": 2404329,
+    "sha256": "dacd6f59e77a686aa4c919700f997c46a68012ae75eba5d2649911ff1fdcda33",
+    "output": "edit_from_generate_1536x1536.png",
+    "peak_memory_mb": 22408.0,
+    "input_image": "generate_1536x1536.png",
+    "input_image_bytes": 5148822
+  }
+]

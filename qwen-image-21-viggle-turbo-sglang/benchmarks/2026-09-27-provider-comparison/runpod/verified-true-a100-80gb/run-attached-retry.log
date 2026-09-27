@@ -1,0 +1,169 @@
+]11;?\[6n→ Checking project
+✓ Project checked
+  [debug] connecting to control plane
+  [debug] control plane session ready
+→ Finding a machine
+  [debug] search gpu=A100 80GB max=$2.00
+✓ Machine selected · A100 80GB · 100 GB disk · $1.604/hour
+  [debug] offer selected gpu=A100 80GB count=1 $1.604/hr total
+→ Starting the machine
+  [debug] start attempt=1
+  [debug] selected machine unavailable; searching again: selected machine is no longer available
+✓ Machine selected · A100 80GB · 100 GB disk · $1.604/hour
+  [debug] offer selected gpu=A100 80GB count=1 $1.604/hr total
+→ Starting the machine
+  [debug] start attempt=2
+  [debug] machine ordered id=vk_490eb288107099c8 status=running
+  [debug] waiting for machine id=vk_490eb288107099c8
+  [debug] machine phase: phase=agent_starting ready=false status=running container up — waiting for session agent to register
+  [debug] machine phase: phase=ready ready=true status=running machine ready
+✓ Machine ready · vk_490eb288107099c8
+  [debug] preparing machine session
+  [debug] machine session ready
+  [debug] connecting to machine session
+  [debug] machine session workspace acknowledged
+→ Preparing the project
+  [debug] stopping previous workload before project sync
+  [debug] syncing project files
+  [debug] sync| preflight: 1 files, 0.5 KiB
+  [debug] sync| upload 1 / 1 files (workers=6)
+  [debug] synced 1 files
+✓ Project prepared · 1 files
+→ Starting the workload
+  [debug] running start: bash serve.sh
+  [debug] app start acknowledged
+  [debug] → waiting for app on [network]…
+Flax classes are deprecated and will be removed in Diffusers v1.0.0. We recommend migrating to PyTorch classes or pinning your version of Diffusers.
+Flax classes are deprecated and will be removed in Diffusers v1.0.0. We recommend migrating to PyTorch classes or pinning your version of Diffusers.
+[2026-09-27 14:24:03] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[09-27 14:24:04] Using layerwise offload components: text_encoder. This reduces peak GPU memory and can increase latency; use --performance-mode speed for GPU-resident defaults when memory allows.
+[09-27 14:24:04] server_args: {"model_path": "Qwen/Qwen-Image-2.1", "model_subfolder": null, "model_variant": null, "model_id": null, "served_model_name": "Qwen/Qwen-Image-2.1", "backend": "auto", "attention_backend": null, "enable_attention_backend_autotune": false, "attention_backend_config": {}, "component_attention_backends": {}, "cache_dit_config": null, "nccl_port": null, "enable_nccl_nvls": false, "trust_remote_code": false, "revision": null, "num_gpus": 1, "performance_mode": "manual", "base_gpu_id": 0, "gpu_ids": null, "nnodes": 1, "node_rank": 0, "dist_init_addr": null, "tp_size": 1, "sp_degree": 1, "ulysses_degree": 1, "ring_degree": 1, "kv_gather_degree": 1, "sp_split_auto": false, "dp_size": 1, "enable_cfg_parallel": false, "cfg_parallel_degree": 1, "encoder_parallel": "auto", "hsdp_replicate_dim": 1, "hsdp_shard_dim": 1, "dist_timeout": 3600, "scheduler_rpc_timeout": null, "pipeline_class_name": null, "lora_path": "Viggle/Qwen-Image-2.1-viggle-turbo", "lora_nickname": "default", "lora_scale": 1.0, "lora_alpha": null, "lora_merge_mode": "auto", "lora_weight_name": "Qwen-Image-2.1-viggle-turbo-v0.2.1-6step-lora-r256.safetensors", "component_paths": {}, "component_weights_paths": {}, "component_direct_gpu_weight_loading": {}, "component_quantizations": {}, "component_precisions": {}, "component_quantization_ignored_layers": {}, "load_diffusion_decoder": false, "transformer_weights_path": null, "minimax_h3_adaln_cache_path": null, "minimax_h3_adaln_online": false, "minimax_h3_adaln_plan_width": 4, "minimax_h3_adaln_host_cache_gb": 8.0, "quantization": null, "quantization_ignored_layers": null, "lora_target_modules": null, "component_residency": {"text_encoder": "layerwise-offload"}, "cpu_offload_components": null, "dit_cpu_offload": null, "direct_gpu_weight_loading": false, "dit_layerwise_offload": null, "layerwise_offload_components": null, "dit_offload_prefetch_size": 0.0, "dit_layerwise_resident_layers": 0.0, "dit_layerwise_residency_policy": "leading", "dit_layerwise_residency_lifetime": "forward", "layerwise_prefetch_size": {}, "layerwise_resident_layers": {}, "layerwise_residency_policy": {}, "layerwise_residency_lifetime": {}, "offload_during_compile": true, "text_encoder_cpu_offload": null, "image_encoder_cpu_offload": null, "vae_cpu_offload": false, "use_fsdp_inference": null, "pin_cpu_memory": true, "ltx2_two_stage_device_mode": null, "comfyui_mode": false, "enable_torch_compile": false, "regional_compile": false, "enable_breakable_cuda_graph": false, "bcg_text_buckets": null, "enable_layerwise_nvtx_marker": false, "warmup_mode": "server", "warmup_resolutions": null, "warmup_num_frames": null, "warmup_steps": 1, "warmup_sampling_params": null, "disable_autocast": true, "master_port": 30005, "host": "0.0.0.0", "port": 30000, "enable_metrics": false, "webui": false, "webui_port": 12312, "scheduler_port": 5653, "scheduler_ports": [5653], "batching_mode": "dynamic", "batching_max_size": 1, "batching_delay_ms": 0.0, "batching_config": null, "enable_batching_metrics": false, "strict_ports": false, "output_path": "outputs/", "input_save_path": "inputs/uploads", "prompt_file_path": null, "model_paths": {}, "model_loaded": {"transformer": true, "vae": true, "video_vae": true, "audio_vae": true, "video_dit": true, "audio_dit": true, "dual_tower_bridge": true}, "boundary_ratio": null, "disagg_role": "monolithic", "disagg_timeout": 3600, "disagg_downstream_wait_timeout": 1800, "disagg_dispatch_policy": "round_robin", "disagg_mode": false, "disagg_instance_id": 0, "disagg_max_slots_per_instance": 8, "disagg_transfer_redundancy": 1.25, "disagg_role_device": "auto", "disagg_transfer_backend": "auto", "disagg_transfer_pool_size": 268435456, "disagg_transfer_pin_memory": "auto", "disagg_p2p_hostname": "127.0.0.1", "disagg_ib_device": null, "disagg_server_addr": null, "encoder_urls": null, "denoiser_urls": null, "decoder_urls": null, "encoder_tp": null, "denoiser_tp": null, "denoiser_sp": null, "denoiser_ulysses": null, "denoiser_ring": null, "decoder_sp": null, "pool_work_endpoint": null, "pool_result_endpoint": null, "pool_control_endpoint": null, "pool_control_advertised_endpoint": null, "log_level": "info", "log_requests": false, "log_requests_level": 2, "log_requests_format": "text", "log_requests_target": null, "uvicorn_access_log_exclude_prefixes": [], "enable_cache_report": false, "enable_trace": false, "otlp_traces_endpoint": "localhost:4317", "otlp_service_name": null, "srt_encoder_url": null, "srt_encoder_connect_timeout": 3.05, "srt_encoder_timeout": 100, "pe_server_url": null, "prompt_enhancer_config": null}
+[09-27 14:24:04] Starting server...
+  [debug] → still waiting for :30000 (probe 15)…
+Flax classes are deprecated and will be removed in Diffusers v1.0.0. We recommend migrating to PyTorch classes or pinning your version of Diffusers.
+Flax classes are deprecated and will be removed in Diffusers v1.0.0. We recommend migrating to PyTorch classes or pinning your version of Diffusers.
+[09-27 14:24:19] Scheduler (dp replica 0) bind at endpoint: tcp://0.0.0.0:5653
+[09-27 14:24:19] torch.compile cache: TORCHINDUCTOR_CACHE_DIR=/root/.cache/sgl_diffusion/torch_compile_cache/inductor TRITON_CACHE_DIR=/root/.cache/sgl_diffusion/torch_compile_cache/triton
+[09-27 14:24:19] Initializing distributed environment with world_size=1, device=cuda:0, timeout=3600
+[09-27 14:24:19] Setting distributed timeout to 3600 seconds
+[09-27 14:24:19] No pipeline_class_name specified, using model_index.json
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[93m[09-27 14:24:20] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.[0;0m
+[09-27 14:24:20] Using pipeline from model_index.json: QwenImage21Pipeline
+[09-27 14:24:20] Loading pipeline modules...
+[09-27 14:24:20] Checking for cached model in Hugging Face Hub cache for Qwen/Qwen-Image-2.1...
+[09-27 14:24:20] Model found in cache but incomplete, will download from Hugging Face Hub
+[09-27 14:24:20] Downloading model snapshot from Hugging Face Hub for Qwen/Qwen-Image-2.1 (attempt 1/5)...
+Fetching 28 files:   0%|          | 0/28 [00:00<?, ?it/s]Fetching 28 files:  11%|█         | 3/28 [00:00<00:01, 18.60it/s]Fetching 28 files:  36%|███▌      | 10/28 [00:00<00:00, 39.12it/s]Fetching 28 files:  57%|█████▋    | 16/28 [00:00<00:00, 45.92it/s]Fetching 28 files:  75%|███████▌  | 21/28 [00:01<00:00, 15.11it/s]  [debug] → still waiting for :30000 (probe 30)…
+Fetching 28 files:  75%|███████▌  | 21/28 [00:20<00:00, 15.11it/s]  [debug] → still waiting for :30000 (probe 45)…
+Fetching 28 files:  79%|███████▊  | 22/28 [00:47<00:26,  4.50s/it]Fetching 28 files:  82%|████████▏ | 23/28 [01:16<00:36,  7.40s/it]Fetching 28 files:  86%|████████▌ | 24/28 [01:24<00:29,  7.44s/it]Fetching 28 files:  89%|████████▉ | 25/28 [01:40<00:22,  7.44s/it]  [debug] → still waiting for :30000 (probe 60)…
+Fetching 28 files:  93%|█████████▎| 26/28 [01:44<00:16,  8.20s/it]Fetching 28 files:  96%|█████████▋| 27/28 [01:53<00:08,  8.29s/it]Fetching 28 files: 100%|██████████| 28/28 [01:54<00:00,  4.09s/it]
+[09-27 14:26:15] Downloaded model to /tmp/workspace/.hf_cache/hub/models--Qwen--Qwen-Image-2.1/snapshots/790c92633540aa0cb11d9abf19eb46d861714758
+[09-27 14:26:15] Model path: /tmp/workspace/.hf_cache/hub/models--Qwen--Qwen-Image-2.1/snapshots/790c92633540aa0cb11d9abf19eb46d861714758
+[09-27 14:26:15] Diffusers version: 0.37.0.dev0
+[09-27 14:26:15] Loading pipeline modules from config: {'_class_name': 'QwenImage21Pipeline', '_diffusers_version': '0.37.0.dev0', 'processor': ['transformers', 'Qwen3VLProcessor'], 'scheduler': ['diffusers', 'FlowMatchEulerDiscreteScheduler'], 'text_encoder': ['transformers', 'Qwen3VLForConditionalGeneration'], 'transformer': ['diffusers', 'QwenImage21Transformer2DModel'], 'vae': ['diffusers', 'AutoencoderKLQwenImage21']}
+[09-27 14:26:15] Loading required components: ['processor', 'text_encoder', 'transformer', 'vae', 'scheduler']
+[09-27 14:26:15] Memory-aware component load order: ['text_encoder', 'transformer', 'vae', 'processor', 'scheduler']
+[09-27 14:26:15] Loading text_encoder from /tmp/workspace/.hf_cache/hub/models--Qwen--Qwen-Image-2.1/snapshots/790c92633540aa0cb11d9abf19eb46d861714758/text_encoder. avail mem: 78.32 GB
+[09-27 14:26:15] Cannot use FlashAttention backend for head size 72.
+Loading required modules:   0%|          | 0/5 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards: 0%|          | 0/4[A
+Loading safetensors checkpoint shards: 25%|██▌       | 1/4[A
+Loading safetensors checkpoint shards: 50%|█████     | 2/4[A
+Loading safetensors checkpoint shards: 75%|███████▌  | 3/4[A
+Loading safetensors checkpoint shards: 100%|██████████| 4/4[ALoading safetensors checkpoint shards: 100%|██████████| 4/4
+[09-27 14:26:18] Attention backends for text_encoder: torch_sdpa, fa
+[09-27 14:26:18] Loaded text_encoder: Qwen3VLForConditionalGeneration (sgl-diffusion version). model size: 16.46 GB, host pageable: 16.46 GB. avail GPU mem: 78.32 GB
+[09-27 14:26:18] Loading transformer from /tmp/workspace/.hf_cache/hub/models--Qwen--Qwen-Image-2.1/snapshots/790c92633540aa0cb11d9abf19eb46d861714758/transformer. avail mem: 78.32 GB
+[09-27 14:26:18] Loading QwenImage21Transformer2DModel from 2 safetensors file(s) , param_dtype: torch.bfloat16
+Loading required modules:  20%|██        | 1/5 [00:02<00:11,  2.94s/it]
+Loading safetensors checkpoint shards: 0%|          | 0/2[ALoading safetensors checkpoint shards: 100%|██████████| 2/2
+[09-27 14:26:21] Attention backends for transformer: fa
+[09-27 14:26:21] Loaded transformer: QwenImage21Transformer2DModel (sgl-diffusion version). model size: 13.25 GB, vram: 13.25 GB. avail GPU mem: 64.98 GB
+[09-27 14:26:21] Loading vae from /tmp/workspace/.hf_cache/hub/models--Qwen--Qwen-Image-2.1/snapshots/790c92633540aa0cb11d9abf19eb46d861714758/vae. avail mem: 64.98 GB
+[09-27 14:26:21] Loaded vae: AutoencoderKLQwenImage21 (sgl-diffusion version). model size: 0.63 GB, vram: 0.63 GB. avail GPU mem: 64.40 GB
+Loading required modules:  40%|████      | 2/5 [00:05<00:08,  2.75s/it][09-27 14:26:21] Loading processor from /tmp/workspace/.hf_cache/hub/models--Qwen--Qwen-Image-2.1/snapshots/790c92633540aa0cb11d9abf19eb46d861714758/processor. avail mem: 64.40 GB
+[09-27 14:26:22] Loaded processor: Qwen3VLProcessor (sgl-diffusion version). model size: NA GB, weights: none. avail GPU mem: 64.40 GB
+Loading required modules:  60%|██████    | 3/5 [00:06<00:03,  1.72s/it][09-27 14:26:22] Loading scheduler from /tmp/workspace/.hf_cache/hub/models--Qwen--Qwen-Image-2.1/snapshots/790c92633540aa0cb11d9abf19eb46d861714758/scheduler. avail mem: 64.40 GB
+Loading required modules:  80%|████████  | 4/5 [00:07<00:01,  1.42s/it][09-27 14:26:22] Loaded scheduler: FlowMatchEulerDiscreteScheduler (sgl-diffusion version). model size: NA GB, weights: none. avail GPU mem: 64.40 GB
+Loading required modules: 100%|██████████| 5/5 [00:07<00:00,  1.40s/it]
+[09-27 14:26:22] Creating pipeline stages...
+[09-27 14:26:22] Using fa attention backend
+[09-27 14:26:35] Converted 232 layers to LoRA layers
+[09-27 14:26:36] Checking for cached model in Hugging Face Hub cache for Viggle/Qwen-Image-2.1-viggle-turbo...
+[09-27 14:26:36] Model not found in cache, will download from Hugging Face Hub
+[09-27 14:26:36] Downloading model snapshot from Hugging Face Hub for Viggle/Qwen-Image-2.1-viggle-turbo (attempt 1/5)...
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:00<00:01,  6.72it/s]Fetching 8 files:  88%|████████▊ | 7/8 [00:00<00:00, 18.79it/s]Fetching 8 files:  88%|████████▊ | 7/8 [00:15<00:00, 18.79it/s]Fetching 8 files: 100%|██████████| 8/8 [00:17<00:00,  3.02s/it]Fetching 8 files: 100%|██████████| 8/8 [00:17<00:00,  2.17s/it]
+[09-27 14:26:53] [LoRAFormatAdapter] normalize_lora_state_dict called, #keys=454
+[09-27 14:26:53] [LoRAFormatAdapter] before convert, sample keys (<=20): transformer.modulation.1.lora_A.weight, transformer.modulation.1.lora_B.weight, transformer.time_text_embed.timestep_embedder.linear_1.lora_A.weight, transformer.time_text_embed.timestep_embedder.linear_1.lora_B.weight, transformer.time_text_embed.timestep_embedder.linear_2.lora_A.weight, transformer.time_text_embed.timestep_embedder.linear_2.lora_B.weight, transformer.transformer_blocks.0.attn.to_k.lora_A.weight, transformer.transformer_blocks.0.attn.to_k.lora_B.weight, transformer.transformer_blocks.0.attn.to_out.0.lora_A.weight, transformer.transformer_blocks.0.attn.to_out.0.lora_B.weight, transformer.transformer_blocks.0.attn.to_q.lora_A.weight, transformer.transformer_blocks.0.attn.to_q.lora_B.weight, transformer.transformer_blocks.0.attn.to_v.lora_A.weight, transformer.transformer_blocks.0.attn.to_v.lora_B.weight, transformer.transformer_blocks.0.img_mlp.gate_layer.lora_A.weight, transformer.transformer_blocks.0.img_mlp.gate_layer.lora_B.weight, transformer.transformer_blocks.0.img_mlp.out.lora_A.weight, transformer.transformer_blocks.0.img_mlp.out.lora_B.weight, transformer.transformer_blocks.0.img_mlp.proj.lora_A.weight, transformer.transformer_blocks.0.img_mlp.proj.lora_B.weight
+[09-27 14:26:53] [LoRAFormatAdapter] detected format: LoRAFormat.STANDARD
+[09-27 14:26:53] [LoRAFormatAdapter] diffusers.lora_conversion_utils converted keys, sample keys (<=20): transformer.modulation.1.lora_A.weight, transformer.modulation.1.lora_B.weight, transformer.time_text_embed.timestep_embedder.linear_1.lora_A.weight, transformer.time_text_embed.timestep_embedder.linear_1.lora_B.weight, transformer.time_text_embed.timestep_embedder.linear_2.lora_A.weight, transformer.time_text_embed.timestep_embedder.linear_2.lora_B.weight, transformer.transformer_blocks.0.attn.to_k.lora_A.weight, transformer.transformer_blocks.0.attn.to_k.lora_B.weight, transformer.transformer_blocks.0.attn.to_out.0.lora_A.weight, transformer.transformer_blocks.0.attn.to_out.0.lora_B.weight, transformer.transformer_blocks.0.attn.to_q.lora_A.weight, transformer.transformer_blocks.0.attn.to_q.lora_B.weight, transformer.transformer_blocks.0.attn.to_v.lora_A.weight, transformer.transformer_blocks.0.attn.to_v.lora_B.weight, transformer.transformer_blocks.0.img_mlp.gate_layer.lora_A.weight, transformer.transformer_blocks.0.img_mlp.gate_layer.lora_B.weight, transformer.transformer_blocks.0.img_mlp.out.lora_A.weight, transformer.transformer_blocks.0.img_mlp.out.lora_B.weight, transformer.transformer_blocks.0.img_mlp.proj.lora_A.weight, transformer.transformer_blocks.0.img_mlp.proj.lora_B.weight
+[09-27 14:26:53] [LoRAFormatAdapter] after convert, sample keys (<=20): transformer.modulation.1.lora_A.weight, transformer.modulation.1.lora_B.weight, transformer.time_text_embed.timestep_embedder.linear_1.lora_A.weight, transformer.time_text_embed.timestep_embedder.linear_1.lora_B.weight, transformer.time_text_embed.timestep_embedder.linear_2.lora_A.weight, transformer.time_text_embed.timestep_embedder.linear_2.lora_B.weight, transformer.transformer_blocks.0.attn.to_k.lora_A.weight, transformer.transformer_blocks.0.attn.to_k.lora_B.weight, transformer.transformer_blocks.0.attn.to_out.0.lora_A.weight, transformer.transformer_blocks.0.attn.to_out.0.lora_B.weight, transformer.transformer_blocks.0.attn.to_q.lora_A.weight, transformer.transformer_blocks.0.attn.to_q.lora_B.weight, transformer.transformer_blocks.0.attn.to_v.lora_A.weight, transformer.transformer_blocks.0.attn.to_v.lora_B.weight, transformer.transformer_blocks.0.img_mlp.gate_layer.lora_A.weight, transformer.transformer_blocks.0.img_mlp.gate_layer.lora_B.weight, transformer.transformer_blocks.0.img_mlp.out.lora_A.weight, transformer.transformer_blocks.0.img_mlp.out.lora_B.weight, transformer.transformer_blocks.0.img_mlp.proj.lora_A.weight, transformer.transformer_blocks.0.img_mlp.proj.lora_B.weight
+[09-27 14:26:53] Rank 0: loaded LoRA adapter Viggle/Qwen-Image-2.1-viggle-turbo
+[09-27 14:26:54] LoRA adapter Viggle/Qwen-Image-2.1-viggle-turbo covers 227/232 LoRA layers; 5 layers use base weights. Examples: img_in, txt_in.in_layer, txt_in.out_layer, norm_out.linear, proj_out
+[09-27 14:26:54] Rank 0: LoRA adapter(s) Viggle/Qwen-Image-2.1-viggle-turbo applied to 227 layers (targets: all, strengths: 1.00, merge_mode=auto)
+[09-27 14:26:54] Pipeline instantiated
+[09-27 14:26:54] Layerwise offload host memory: 168.0 GiB available (cgroup cap 233.8 GiB, in use 65.8 GiB)
+[09-27 14:26:54] Configuring layerwise offload for text_encoder (Qwen3VLForConditionalGeneration): model.language_model.layers (36 layers), model.visual.blocks (27 layers), model.visual.deepstack_merger_list (3 layers)
+  [debug] → still waiting for :30000 (probe 75)…
+[09-27 14:27:10] Keeping Embedding (1.16 GiB) in host memory: a gather reads one row per token, so residency buys almost nothing.
+[09-27 14:27:10] Layerwise offload ready for text_encoder (Qwen3VLForConditionalGeneration) in 16.70s: groups=3, layers=66, prefetch/group=1, resident=0/66 (forward), policy=leading
+[09-27 14:27:10] Layerwise offload summary: text_encoder (vram: 1.83 GB, host pinned: 13.93 GB, host pageable: 1.16 GB)
+[09-27 14:27:10] Worker 0: Initialized device, model, and distributed environment.
+[09-27 14:27:10] Worker 0: Scheduler loop started.
+[09-27 14:27:10] [server-load] workers_ready_monotonic_ns=11379813330192635
+[09-27 14:27:10] Starting FastAPI server.
+[2026-09-27 14:27:10] [32mINFO[0m:     Started server process [[36m548[0m]
+[2026-09-27 14:27:10] [32mINFO[0m:     Waiting for application startup.
+[09-27 14:27:10] ZMQ Broker is listening for offline jobs on tcp://127.0.0.1:30001
+[2026-09-27 14:27:11] [32mINFO[0m:     Application startup complete.
+[2026-09-27 14:27:11] [32mINFO[0m:     Uvicorn running on [1mhttp://0.0.0.0:30000[0m (Press CTRL+C to quit)
+[2026-09-27 14:27:12] [32mINFO[0m:     127.0.0.1:55184 - "[1mGET /liveness HTTP/1.1[0m" [32m200 OK[0m
+  [debug] → app is listening on :30000
+✓ Workload running · http://127.0.0.1:49494
+  [debug] forward local=49494 remote=30000
+service attached — Ctrl+C to disconnect
+  [debug] auto_stop=false
+Warmup requests:   0%|          | 0/1 [00:00<?, ?req/s]Warmup requests: 100%|██████████| 1/1 [00:19<00:00, 19.04s/req, server warmup req (1024x1024, 2/40 steps), last=19.04s][09-27 14:27:31] The server is fired up and ready to roll!
+Warmup requests: 100%|██████████| 1/1 [00:19<00:00, 19.04s/req, server warmup req (1024x1024, 2/40 steps), last=19.04s]
+[09-27 14:27:46] Sampling params:
+                       width: 1024
+                      height: 1024
+                  num_frames: 1
+                         fps: 24
+                      prompt: <redacted, len=88>
+                  neg_prompt: None
+                        seed: 4242
+                 infer_steps: 6
+      num_outputs_per_prompt: 1
+              guidance_scale: 1.0
+     embedded_guidance_scale: 6.0
+                    n_tokens: None
+                  flow_shift: None
+                  image_path: None
+                 save_output: True
+            output_file_path: outputs/1af93915-4950-41ef-859e-e8ba1f573b0d.png
+
+[09-27 14:27:46] Running pipeline stages: ['QwenImage21InputValidationStage', 'conditioning_stage', 'LatentPreparationStage', 'TimestepPreparationStage', 'denoising_stage', 'decoding_stage']
+[09-27 14:27:46] [QwenImage21InputValidationStage] started...
+[09-27 14:27:46] [QwenImage21InputValidationStage] finished in 0.0001 seconds
+[09-27 14:27:46] [QwenImage21EncodingStage] started...
+[09-27 14:27:47] [QwenImage21EncodingStage] finished in 0.6332 seconds
+[09-27 14:27:47] [LatentPreparationStage] started...
+[09-27 14:27:47] [LatentPreparationStage] finished in 0.0015 seconds
+[09-27 14:27:47] [TimestepPreparationStage] started...
+[09-27 14:27:47] [TimestepPreparationStage] finished in 0.0006 seconds
+[09-27 14:27:47] [QwenImage21DenoisingStage] started...
+  0%|          | 0/6 [00:00<?, ?it/s] 17%|█▋        | 1/6 [00:02<00:13,  2.77s/it] 33%|███▎      | 2/6 [00:02<00:04,  1.22s/it] 50%|█████     | 3/6 [00:03<00:02,  1.37it/s] 67%|██████▋   | 4/6 [00:03<00:01,  1.79it/s] 83%|████████▎ | 5/6 [00:03<00:00,  2.16it/s]100%|██████████| 6/6 [00:03<00:00,  2.46it/s][09-27 14:27:51] [QwenImage21DenoisingStage] average time per step: 0.6566 seconds
+100%|██████████| 6/6 [00:03<00:00,  1.52it/s]
+[09-27 14:27:51] [QwenImage21DenoisingStage] finished in 3.9412 seconds
+[09-27 14:27:51] [DecodingStage] started...
+[09-27 14:27:51] [DecodingStage] finished in 0.5850 seconds
+[09-27 14:27:52] Output saved to [1;36moutputs/1af93915-4950-41ef-859e-e8ba1f573b0d.png[0;0m
+[09-27 14:27:52] Pixel data generated successfully in [92m5.49[0;0m seconds
+[09-27 14:27:52] Peak memory usage: 25024.00 MB
+[2026-09-27 14:27:52] [32mINFO[0m:     127.0.0.1:52272 - "[1mPOST /v1/images/generations HTTP/1.1[0m" [32m200 OK[0m
+Machine: vk_490eb288107099c8
+Inspect logs: vkong attach vk_490eb288107099c8
+GPU and billing continue until: vkong app stop qwen21-viggle-runpod-verified-a100-20260927
+✗ Connection to the machine was lost. Check the App status before reconnecting.

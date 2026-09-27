@@ -1,0 +1,65 @@
+{
+  "date": "2026-09-27",
+  "account": "dotieuthien",
+  "cli_version": "v0.10.16",
+  "cleanup": {"active_instances": 0, "quota_used": 0, "reserved_usd": 0},
+  "vastai": {
+    "gpu": "RTX 5090",
+    "hourly_usd": 0.361112,
+    "result": "inconclusive",
+    "detail": "Container ran but the agent was not Ready before manual stop; no endpoint was created."
+  },
+  "runpod": {
+    "rtx_5090_first": {
+      "hourly_usd": 0.703699,
+      "result": "failed",
+      "detail": "Agent became Ready; workload failed during CUDA initialization."
+    },
+    "rtx_5090_retry": {
+      "hourly_usd": 1.003699,
+      "result": "failed",
+      "detail": "CUDA error 804: forward compatibility was attempted on unsupported hardware."
+    },
+    "a100_80gb_first": {
+      "hourly_usd": 1.603699,
+      "result": "failed",
+      "detail": "Container stayed running without agent Ready for about 18 minutes."
+    },
+    "a100_80gb_retry": {
+      "hourly_usd": 1.603699,
+      "result": "passed_generation",
+      "agent_ready_seconds_approx": 300,
+      "base_model_pull_seconds": 115,
+      "base_model_cache_state": "partial",
+      "lora_pull_seconds": 17,
+      "deploy_restart_seconds_approx": 94,
+      "localhost_generation": {
+        "elapsed_seconds": 11.9,
+        "server_inference_seconds": 5.167179184034467,
+        "non_inference_overhead_seconds": 6.732,
+        "request_bytes": 228,
+        "response_bytes": 2732837,
+        "image_bytes": 2049343,
+        "peak_memory_mb": 25024.0,
+        "sha256": "f987a84d5f5aae7542a91966a95041cbae4528d1edba7bb08bc078ddf7056aa6",
+        "output": "runpod/verified-true-a100-80gb/localhost-generate-1024x1024.png"
+      },
+      "public_generation": {
+        "elapsed_seconds": 12.251,
+        "server_inference_seconds": 2.4710101392120123,
+        "non_inference_overhead_seconds": 9.78,
+        "request_bytes": 228,
+        "response_bytes": 2732838,
+        "image_bytes": 2049343,
+        "peak_memory_mb": 25024.0,
+        "sha256": "f987a84d5f5aae7542a91966a95041cbae4528d1edba7bb08bc078ddf7056aa6",
+        "output": "runpod/verified-true-a100-80gb/public-generate-1024x1024.png"
+      },
+      "public_image_edit": {
+        "input_bytes": 2049343,
+        "result": "failed",
+        "detail": "TLS handshake failed once; one retry stalled sending multipart data for over 90 seconds."
+      }
+    }
+  }
+}

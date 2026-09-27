@@ -84,6 +84,7 @@ frameworks without becoming one long mixed list.
 | Recipe | Framework | Model | Compute |
 |---|---|---|---:|
 | [SDXL image generation](sdxl-image-generation) | Diffusers | SSD-1B text-to-image task | 1× RTX 4090 |
+| [Qwen-Image 2.1 with Viggle Turbo](qwen-image-21-viggle-turbo-sglang) | SGLang Diffusion | 6-step text-to-image and image-editing API | 1× RTX 4090 |
 
 Start with **Hello World** to verify login, provisioning, sync, and connectivity.
 Use **llama.cpp** or **SGLang** for a practical single-GPU inference service.

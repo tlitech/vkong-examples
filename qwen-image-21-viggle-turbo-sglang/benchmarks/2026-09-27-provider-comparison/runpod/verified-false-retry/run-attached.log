@@ -1,0 +1,119 @@
+]11;?\[6n→ Checking project
+✓ Project checked
+  [debug] connecting to control plane
+  [debug] control plane session ready
+→ Finding a machine
+  [debug] search gpu=RTX 5090 max=$2.00
+✓ Machine selected · RTX 5090 32GB · 100 GB disk · $1.004/hour
+  [debug] offer selected gpu=RTX 5090 32GB count=1 $1.004/hr total
+→ Starting the machine
+  [debug] start attempt=1
+  [debug] machine ordered id=vk_41efbdcaab5ec5d7 status=running
+  [debug] waiting for machine id=vk_41efbdcaab5ec5d7
+  [debug] machine phase: phase=agent_starting ready=false status=running container up — waiting for session agent to register
+  [debug] machine phase: phase=ready ready=true status=running machine ready
+✓ Machine ready · vk_41efbdcaab5ec5d7
+  [debug] preparing machine session
+  [debug] machine session ready
+  [debug] connecting to machine session
+  [debug] machine session workspace acknowledged
+→ Preparing the project
+  [debug] stopping previous workload before project sync
+  [debug] syncing project files
+  [debug] sync| preflight: 5 files, 13.3 KiB
+  [debug] sync| upload 5 / 5 files (workers=6)
+  [debug] synced 5 files
+✓ Project prepared · 5 files
+→ Starting the workload
+  [debug] running start: bash serve.sh
+  [debug] app start acknowledged
+  [debug] → waiting for app on [network]…
+[2026-09-27 14:13:12] Failed to get device capability: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW.
+[2026-09-27 14:13:12] Failed to get device capability: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW.
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/gguf.py:69: UserWarning: Only CUDA, MUSA and NPU support GGUF quantization currently.
+  warnings.warn(f"Only CUDA, MUSA and NPU support GGUF quantization currently.")
+Flax classes are deprecated and will be removed in Diffusers v1.0.0. We recommend migrating to PyTorch classes or pinning your version of Diffusers.
+Flax classes are deprecated and will be removed in Diffusers v1.0.0. We recommend migrating to PyTorch classes or pinning your version of Diffusers.
+[2026-09-27 14:13:31] Skipping pipeline module sglang.multimodal_gen.runtime.pipelines.glm_image during discovery due to import failure: cannot import name 'norm_infer' from 'sglang.kernels.ops.diffusion' (/sgl-workspace/sglang/python/sglang/kernels/ops/diffusion/__init__.py)
+[2026-09-27 14:13:33] Skipping pipeline module sglang.multimodal_gen.runtime.pipelines.ming_image_pipeline during discovery due to import failure: cannot import name 'norm_infer' from 'sglang.kernels.ops.diffusion' (/sgl-workspace/sglang/python/sglang/kernels/ops/diffusion/__init__.py)
+[2026-09-27 14:13:33] Skipping pipeline module sglang.multimodal_gen.runtime.pipelines.mova_pipeline during discovery due to import failure: cannot import name 'norm_infer' from 'sglang.kernels.ops.diffusion' (/sgl-workspace/sglang/python/sglang/kernels/ops/diffusion/__init__.py)
+[2026-09-27 14:13:33] Skipping pipeline module sglang.multimodal_gen.runtime.pipelines.sana_wm_pipeline during discovery due to import failure: cannot import name 'norm_infer' from 'sglang.kernels.ops.diffusion' (/sgl-workspace/sglang/python/sglang/kernels/ops/diffusion/__init__.py)
+[2026-09-27 14:13:33] Skipping pipeline module sglang.multimodal_gen.runtime.pipelines.sana_wm_realtime_pipeline during discovery due to import failure: cannot import name 'norm_infer' from 'sglang.kernels.ops.diffusion' (/sgl-workspace/sglang/python/sglang/kernels/ops/diffusion/__init__.py)
+[2026-09-27 14:13:40] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[09-27 14:13:40] Using layerwise offload components: text_encoder. This reduces peak GPU memory and can increase latency; use --performance-mode speed for GPU-resident defaults when memory allows.
+[09-27 14:13:40] server_args: {"model_path": "Qwen/Qwen-Image-2.1", "model_subfolder": null, "model_variant": null, "model_id": null, "served_model_name": "Qwen/Qwen-Image-2.1", "backend": "auto", "attention_backend": null, "enable_attention_backend_autotune": false, "attention_backend_config": {}, "component_attention_backends": {}, "cache_dit_config": null, "nccl_port": null, "enable_nccl_nvls": false, "trust_remote_code": false, "revision": null, "num_gpus": 1, "performance_mode": "manual", "base_gpu_id": 0, "gpu_ids": null, "nnodes": 1, "node_rank": 0, "dist_init_addr": null, "tp_size": 1, "sp_degree": 1, "ulysses_degree": 1, "ring_degree": 1, "kv_gather_degree": 1, "sp_split_auto": false, "dp_size": 1, "enable_cfg_parallel": false, "cfg_parallel_degree": 1, "encoder_parallel": "auto", "hsdp_replicate_dim": 1, "hsdp_shard_dim": 1, "dist_timeout": 3600, "scheduler_rpc_timeout": null, "pipeline_class_name": null, "lora_path": "Viggle/Qwen-Image-2.1-viggle-turbo", "lora_nickname": "default", "lora_scale": 1.0, "lora_alpha": null, "lora_merge_mode": "auto", "lora_weight_name": "Qwen-Image-2.1-viggle-turbo-v0.2.1-6step-lora-r256.safetensors", "component_paths": {}, "component_weights_paths": {}, "component_direct_gpu_weight_loading": {}, "component_quantizations": {}, "component_precisions": {}, "component_quantization_ignored_layers": {}, "load_diffusion_decoder": false, "transformer_weights_path": null, "minimax_h3_adaln_cache_path": null, "minimax_h3_adaln_online": false, "minimax_h3_adaln_plan_width": 4, "minimax_h3_adaln_host_cache_gb": 8.0, "quantization": null, "quantization_ignored_layers": null, "lora_target_modules": null, "component_residency": {"text_encoder": "layerwise-offload"}, "cpu_offload_components": null, "dit_cpu_offload": null, "direct_gpu_weight_loading": false, "dit_layerwise_offload": null, "layerwise_offload_components": null, "dit_offload_prefetch_size": 0.0, "dit_layerwise_resident_layers": 0.0, "dit_layerwise_residency_policy": "leading", "dit_layerwise_residency_lifetime": "forward", "layerwise_prefetch_size": {}, "layerwise_resident_layers": {}, "layerwise_residency_policy": {}, "layerwise_residency_lifetime": {}, "offload_during_compile": true, "text_encoder_cpu_offload": null, "image_encoder_cpu_offload": null, "vae_cpu_offload": false, "use_fsdp_inference": null, "pin_cpu_memory": true, "ltx2_two_stage_device_mode": null, "comfyui_mode": false, "enable_torch_compile": false, "regional_compile": false, "enable_breakable_cuda_graph": false, "bcg_text_buckets": null, "enable_layerwise_nvtx_marker": false, "warmup_mode": "server", "warmup_resolutions": null, "warmup_num_frames": null, "warmup_steps": 1, "warmup_sampling_params": null, "disable_autocast": true, "master_port": 30005, "host": "0.0.0.0", "port": 30000, "enable_metrics": false, "webui": false, "webui_port": 12312, "scheduler_port": 5589, "scheduler_ports": [5589], "batching_mode": "dynamic", "batching_max_size": 1, "batching_delay_ms": 0.0, "batching_config": null, "enable_batching_metrics": false, "strict_ports": false, "output_path": "outputs/", "input_save_path": "inputs/uploads", "prompt_file_path": null, "model_paths": {}, "model_loaded": {"transformer": true, "vae": true, "video_vae": true, "audio_vae": true, "video_dit": true, "audio_dit": true, "dual_tower_bridge": true}, "boundary_ratio": null, "disagg_role": "monolithic", "disagg_timeout": 3600, "disagg_downstream_wait_timeout": 1800, "disagg_dispatch_policy": "round_robin", "disagg_mode": false, "disagg_instance_id": 0, "disagg_max_slots_per_instance": 8, "disagg_transfer_redundancy": 1.25, "disagg_role_device": "auto", "disagg_transfer_backend": "auto", "disagg_transfer_pool_size": 268435456, "disagg_transfer_pin_memory": "auto", "disagg_p2p_hostname": "127.0.0.1", "disagg_ib_device": null, "disagg_server_addr": null, "encoder_urls": null, "denoiser_urls": null, "decoder_urls": null, "encoder_tp": null, "denoiser_tp": null, "denoiser_sp": null, "denoiser_ulysses": null, "denoiser_ring": null, "decoder_sp": null, "pool_work_endpoint": null, "pool_result_endpoint": null, "pool_control_endpoint": null, "pool_control_advertised_endpoint": null, "log_level": "info", "log_requests": false, "log_requests_level": 2, "log_requests_format": "text", "log_requests_target": null, "uvicorn_access_log_exclude_prefixes": [], "enable_cache_report": false, "enable_trace": false, "otlp_traces_endpoint": "localhost:4317", "otlp_service_name": null, "srt_encoder_url": null, "srt_encoder_connect_timeout": 3.05, "srt_encoder_timeout": 100, "pe_server_url": null, "prompt_enhancer_config": null}
+[09-27 14:13:40] Starting server...
+/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py:188: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+  [debug] → still waiting for :30000 (probe 15)…
+Failed to get device capability: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW.
+Failed to get device capability: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW.
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/awq/awq.py:53: UserWarning: Only CUDA, HIP and XPU support AWQ currently.
+  warnings.warn(f"Only CUDA, HIP and XPU support AWQ currently.")
+/sgl-workspace/sglang/python/sglang/srt/layers/quantization/gguf.py:69: UserWarning: Only CUDA, MUSA and NPU support GGUF quantization currently.
+  warnings.warn(f"Only CUDA, MUSA and NPU support GGUF quantization currently.")
+Flax classes are deprecated and will be removed in Diffusers v1.0.0. We recommend migrating to PyTorch classes or pinning your version of Diffusers.
+Flax classes are deprecated and will be removed in Diffusers v1.0.0. We recommend migrating to PyTorch classes or pinning your version of Diffusers.
+[09-27 14:13:55] Scheduler (dp replica 0) bind at endpoint: tcp://0.0.0.0:5589
+[09-27 14:13:55] Worker 0: Shutdown complete.
+Process sglang-diffusionWorker-0:
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/sgl-workspace/sglang/python/sglang/multimodal_gen/runtime/managers/worker_bootstrap.py", line 147, in bootstrap_scheduler_process
+    gpu_worker.run_scheduler_process(
+  File "/sgl-workspace/sglang/python/sglang/multimodal_gen/runtime/managers/gpu_worker.py", line 1600, in run_scheduler_process
+    scheduler = Scheduler(
+                ^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/multimodal_gen/runtime/managers/scheduler.py", line 134, in __init__
+    worker = Exec_worker(
+             ^^^^^^^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/multimodal_gen/runtime/managers/gpu_worker.py", line 245, in __init__
+    self.init_device_and_model()
+  File "/sgl-workspace/sglang/python/sglang/multimodal_gen/runtime/managers/gpu_worker.py", line 361, in init_device_and_model
+    current_platform.set_device(current_platform.get_device(self.local_rank))
+  File "/sgl-workspace/sglang/python/sglang/multimodal_gen/runtime/platforms/interface.py", line 299, in set_device
+    torch.get_device_module(device).set_device(device)
+  File "/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py", line 689, in set_device
+    torch._C._cuda_setDevice(device)
+  File "/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py", line 529, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW
+[91m[09-27 14:13:57] Rank 0 scheduler is dead. Please check if there are relevant logs.[0;0m
+[91m[09-27 14:13:57] Exit code: 1[0;0m
+[09-27 14:13:57] kill_process_tree called: parent_pid=153, include_parent=False, pid=153
+Traceback (most recent call last):
+  File "/opt/sglang/bin/sglang", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/sgl-workspace/sglang/python/sglang/cli/main.py", line 51, in main
+    serve(args, extra_argv)
+  File "/sgl-workspace/sglang/python/sglang/cli/serve.py", line 213, in serve
+    registered.backend.run(request)
+  File "/sgl-workspace/sglang/python/sglang/cli/serve.py", line 131, in _run_diffusion
+    execute_serve_cmd(parsed_args, remaining_argv)
+  File "/sgl-workspace/sglang/python/sglang/multimodal_gen/runtime/entrypoints/cli/serve.py", line 39, in execute_serve_cmd
+    dispatch_launch(server_args)
+  File "/sgl-workspace/sglang/python/sglang/multimodal_gen/runtime/launch_server.py", line 786, in dispatch_launch
+    launch_server(server_args)
+  File "/sgl-workspace/sglang/python/sglang/multimodal_gen/runtime/launch_server.py", line 196, in launch_server
+    data = reader.recv()
+           ^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 399, in _recv
+    raise EOFError
+EOFError
+  [debug] → still waiting for :30000 (probe 30)…
+^CMachine: vk_41efbdcaab5ec5d7
+Inspect logs: vkong attach vk_41efbdcaab5ec5d7
+GPU and billing continue until: vkong app stop qwen-image-21-viggle-turbo-sglang
+✗ app not listening on port 30000: app not listening on port 30000 within timeout: context canceled

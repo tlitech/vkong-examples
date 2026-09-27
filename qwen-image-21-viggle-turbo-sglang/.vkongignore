@@ -1,0 +1,5 @@
+# Benchmark evidence belongs on the client and must not be uploaded to rentals.
+benchmarks/
+benchmark-output/
+__pycache__/
+output.png
