@@ -141,7 +141,7 @@ VKONG_URL=https://<your-app-url> python3 benchmark_concurrency.py \
   --total 100 --concurrencies 1,2,3,4,5,6,7,8 --size 512x512
 ```
 
-### Measured concurrency run (tsdocode, 2026-09-27)
+### Measured concurrency run (2026-09-27)
 
 One warmed-up run generated 100 total 512×512 images (six steps, guidance 1.0)
 over the VKong public HTTPS route. The concurrency levels ran in sequential
