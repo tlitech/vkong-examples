@@ -84,8 +84,8 @@ The measurements have two boundaries:
 ### Generated images
 
 These are all five measured inference outputs from the RTX 4090 run. The first
-four are text-to-image generations, and the last uses the 1536×1536 image as
-input for an image-edit request.
+four are text-to-image generations. The final row shows the image-edit input
+again beside its edited output so the change can be compared directly.
 
 <table>
   <tr>
@@ -110,7 +110,7 @@ input for an image-edit request.
   </tr>
   <tr>
     <td align="center">
-      <a href="assets/generate_1536x1536.png"><img src="assets/generate_1536x1536.png" alt="1536 by 1536 input image used for image editing" width="360"></a><br>
+      <a href="assets/edit_input_1536x1536.png"><img src="assets/edit_input_1536x1536.png" alt="1536 by 1536 input image used for image editing" width="360"></a><br>
       <strong>Edit input · 1536×1536</strong>
     </td>
     <td align="center">
