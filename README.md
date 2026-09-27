@@ -163,10 +163,11 @@ command used to verify it.
 ## Recipe style
 
 Start each README with the result, then show **Run → Try → Stop**. Keep the first
-run short. Put optional cache, deployment, and tuning instructions afterwards.
+run short. Put optional deployment and tuning instructions afterwards.
 
 - Use an image with the framework already installed.
-- Group YAML fields under App, Compute, Budget, Storage (when used), and Runtime.
+- Group YAML fields under App, Compute, Budget, Storage (training tasks only), and Runtime.
+- Do not add `storage` or `cache` to services or other non-training recipes.
 - Keep YAML focused on compute, image, and a short setup/start command.
 - Let the framework download its model; set its cache location instead of writing a downloader.
 - Use `requirements.txt` for dependency lists and a small Python file for model conversion or preparation.

@@ -75,18 +75,12 @@ Stop the GPU when finished:
 vkong app stop diffusiongemma-jev-vllm
 ```
 
-## Keep the model cache
+## Model cache
 
-The default cache lives on the current rental. To keep it between machines, add:
-
-```yaml
-storage: diffusiongemma-cache
-cache: [huggingface]
-```
-
-VKong restores the saved cache at `/data` and supplies `HF_HOME`; vLLM handles
-model downloads. Cache bytes count toward storage usage. Keep enough machine
-disk for the image, restored cache, and new writes.
+The framework downloads the model to the rental's local disk. That cache is
+removed when the machine is released, and a new machine downloads it again.
+Do not add `storage` to this service: workspace volumes are for training tasks
+that write checkpoints to `/data`.
 
 ## What the client sends
 

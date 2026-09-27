@@ -31,8 +31,7 @@ Use that URL as `VKONG_URL` with the same client.
 vkong app stop mobilenetv2-triton
 ```
 
-This releases the machine and stops compute billing. If storage is attached,
-VKong saves the volume during a controlled stop; storage billing is separate.
+This releases the machine and stops compute billing.
 
 ## Customize
 

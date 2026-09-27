@@ -12,22 +12,8 @@ vkong run
 ```
 
 The task prints its result and exits. Its `output.png` stays in the remote
-project directory while the machine is active.
-
-## Keep the output
-
-For durable output, add `storage: sdxl-image-generation-data` to `vkong.yaml` and
-change the output path in the Python script to `/data/output.png` before running.
-Allow enough `disk_gb` for the runtime and restored data. After a successful run,
-stop the App to save the volume, then download the saved file:
-
-```bash
-vkong app stop sdxl-image-generation
-vkong storage download sdxl-image-generation-data output.png -o output.png
-```
-
-Storage only saves files under `/data`. The default project-directory output
-is temporary and is removed when the machine is destroyed.
+project directory while the machine is active and is removed when the machine is
+released. This example does not attach `storage`.
 
 ## Stop
 

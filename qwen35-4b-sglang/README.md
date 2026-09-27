@@ -31,23 +31,14 @@ Use that URL as `VKONG_URL` with the same client.
 vkong app stop qwen35-4b-sglang
 ```
 
-This releases the machine and stops compute billing. If storage is attached,
-VKong saves the volume during a controlled stop; storage billing is separate.
+This releases the machine and stops compute billing.
 
-## Keep the model cache
+## Model cache
 
-By default the cache lasts for this rental. To save it between machines, add
-these fields to `vkong.yaml` before starting:
-
-```yaml
-storage: qwen35-4b-sglang-cache
-cache: [huggingface]
-```
-
-VKong mounts the volume at `/data` and sets the framework's cache location.
-The framework handles model downloads. A new machine restores the saved cache;
-it does not mount it lazily. Saved cache bytes count toward storage usage.
-Choose enough `disk_gb` for the runtime, restored data, and headroom.
+The framework downloads the model to the rental's local disk. That cache is
+removed when the machine is released, and a new machine downloads it again.
+Do not add `storage` to this service: workspace volumes are for training tasks
+that write checkpoints to `/data`.
 
 ## Customize
 
