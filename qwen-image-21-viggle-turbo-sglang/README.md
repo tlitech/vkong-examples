@@ -141,12 +141,31 @@ VKONG_URL=https://<your-app-url> python3 benchmark_concurrency.py \
   --total 100 --concurrencies 1,2,3,4,5,6,7,8 --size 512x512
 ```
 
-A 100-request RTX 4090 run by **tsdocode** is documented in
-[`benchmark-results-tsdocode-2026-09-27.md`](benchmark-results-tsdocode-2026-09-27.md),
-with per-request measurements in the adjacent JSON file. It achieved 100/100
-successful requests; throughput increased from 0.398 images/s at concurrency 1
-to approximately 0.74–0.77 images/s at concurrency 2–8, while per-request latency
-rose as concurrent requests queued. This is one warmed-up run, not an SLA.
+### Measured concurrency run (tsdocode, 2026-09-27)
+
+One warmed-up run generated 100 total 512×512 images (six steps, guidance 1.0)
+over the VKong public HTTPS route. The concurrency levels ran in sequential
+batches; levels 1–4 had 13 requests each and levels 5–8 had 12 each. All 100
+requests succeeded.
+
+| Concurrency | Samples | Mean latency | Median | p95 | Mean SGLang inference | Mean combined overhead | Throughput |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 13 | 2.510 s | 2.564 s | 3.916 s | 1.169 s | 1.341 s | 0.398 img/s |
+| 2 | 13 | 2.602 s | 2.496 s | 4.003 s | 1.155 s | 1.447 s | 0.740 img/s |
+| 3 | 13 | 3.609 s | 3.712 s | 4.452 s | 1.159 s | 2.450 s | 0.768 img/s |
+| 4 | 13 | 4.706 s | 5.035 s | 5.839 s | 1.160 s | 3.546 s | 0.766 img/s |
+| 5 | 12 | 5.489 s | 6.231 s | 6.843 s | 1.157 s | 4.331 s | 0.767 img/s |
+| 6 | 12 | 6.289 s | 7.432 s | 8.373 s | 1.163 s | 5.125 s | 0.758 img/s |
+| 7 | 12 | 6.956 s | 8.443 s | 9.385 s | 1.159 s | 5.797 s | 0.761 img/s |
+| 8 | 12 | 7.527 s | 8.744 s | 10.875 s | 1.159 s | 6.368 s | 0.766 img/s |
+
+Throughput rose from 0.398 images/s at concurrency 1 to about 0.74–0.77 at
+concurrency 2–8, then mostly plateaued, while per-request latency increased as
+requests queued. p95 is nearest-rank (`ceil(0.95 × n)`), which is the maximum
+observation for these small sample counts. Combined overhead is end-to-end time
+minus SGLang inference; it includes queueing, response encoding, routing and
+transfer, and is not VKong network-only latency. This single warmed-up run is
+not an SLA.
 
 ## Runtime notes
 
