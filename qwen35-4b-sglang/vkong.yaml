@@ -12,7 +12,8 @@ disk_gb: 80
 inet_down_mbps: 500
 
 # Budget
-max_dph: 2.5
+# vkong dev quotes about $2.71/hour; for vkong run only, max_dph: 2.5 is enough.
+max_dph: 3.0
 verified_only: true
 
 # Runtime
